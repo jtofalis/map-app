@@ -8,6 +8,7 @@
 import React, { Fragment, useState } from 'react';
 import Buttons from './components/Buttons';
 import FrisbeePitch from './components/FrisbeePitch';
+import PieChart from './components/PieChart';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import PositionSummary from './components/PositionSummary';
@@ -57,35 +58,28 @@ const UltimateFrisbeePitch = () => {
 
   return (
     <div style={styles.top70}>
-      <div>
-        <input
-          type='text'
-          placeholder='TEAM 1 VS TEAM 2'
-          value={title}
-          onChange={handleChange}
-          style={styles.topTitle}
-        />
-        <FrisbeePitch>
-          {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
+      <input type='text' placeholder='TEAM 1 VS TEAM 2' value={title} onChange={handleChange} style={styles.topTitle} />
+      <FrisbeePitch>
+        {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
 
-          {savedPositions.map((savedPos, index) => (
-            <Fragment key={index}>
-              <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
-              <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
-            </Fragment>
-          ))}
+        {savedPositions.map((savedPos, index) => (
+          <Fragment key={index}>
+            <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
+            <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
+          </Fragment>
+        ))}
 
-          <PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />
-          <PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />
-        </FrisbeePitch>
-        <PositionSummary savedPositions={savedPositions} />
-        <Buttons
-          handleClearAll={handleClearAll}
-          handleSave={handleSave}
-          handleRemoveLast={handleRemoveLast}
-          handleToggleArrows={() => setShowArrows((prev) => !prev)}
-        />
-      </div>
+        <PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />
+        <PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />
+      </FrisbeePitch>
+      <PositionSummary savedPositions={savedPositions} />
+      <PieChart savedPositions={savedPositions} />
+      <Buttons
+        handleClearAll={handleClearAll}
+        handleSave={handleSave}
+        handleRemoveLast={handleRemoveLast}
+        handleToggleArrows={() => setShowArrows((prev) => !prev)}
+      />
     </div>
   );
 };
