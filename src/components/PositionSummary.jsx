@@ -2,7 +2,7 @@ import DistanceResult from './DistanceResult';
 
 const PositionSummary = ({ savedPositions }) => {
   return (
-    <div style={{overflow: 'scroll'}}>
+    <div>
       <p>
         <strong>Saved Positions:</strong>
       </p>

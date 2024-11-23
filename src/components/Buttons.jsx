@@ -1,19 +1,20 @@
 import AddIcon from '@mui/icons-material/Add';
+import CompareArrows from '@mui/icons-material/CompareArrows';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UndoIcon from '@mui/icons-material/Undo';
 import { Button } from '@mui/material';
 
-const Buttons = ({handleSave, handleRemoveLast, handleClearAll}) => {
+const Buttons = ({handleSave, handleRemoveLast, handleClearAll, handleToggleArrows}) => {
   return (
     <div
       style={{
         background: '#dcf5f5',
-        height: '9vh',
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
         justifyContent: 'space-between',
         padding: '10px',
         backgroundColor: 'white',
@@ -27,7 +28,6 @@ const Buttons = ({handleSave, handleRemoveLast, handleClearAll}) => {
         onClick={handleSave}
         aria-label='clear all'
       >
-        {' '}
         Add
       </Button>
       <Button
@@ -38,7 +38,6 @@ const Buttons = ({handleSave, handleRemoveLast, handleClearAll}) => {
         onClick={handleRemoveLast}
         aria-label='clear all'
       >
-        {' '}
         Undo
       </Button>
       <Button
@@ -49,8 +48,17 @@ const Buttons = ({handleSave, handleRemoveLast, handleClearAll}) => {
         onClick={handleClearAll}
         aria-label='clear all'
       >
-        {' '}
         Clear
+      </Button>
+      <Button
+        size='large'
+        variant='contained'
+        color='#dcf5e9'
+        startIcon={<CompareArrows />}
+        onClick={handleToggleArrows}
+        aria-label='Toggle Arrows'
+      >
+        Toggle Arrows
       </Button>
     </div>
   );
