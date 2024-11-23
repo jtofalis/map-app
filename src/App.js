@@ -20,6 +20,8 @@ const UltimateFrisbeePitch = () => {
     catcher: { x: 0, y: 0 },
   });
 
+  const [showArrows, setShowArrows] = useState(true);
+
   // State to track a list of saved positions
   const [savedPositions, setSavedPositions] = useState([]);
 
@@ -64,7 +66,7 @@ const UltimateFrisbeePitch = () => {
           style={styles.topTitle}
         />
         <FrisbeePitch>
-          <SavedPositionsLines savedPositions={savedPositions} />
+          {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
 
           {savedPositions.map((savedPos, index) => (
             <Fragment key={index}>
@@ -77,7 +79,12 @@ const UltimateFrisbeePitch = () => {
           <PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />
         </FrisbeePitch>
         <PositionSummary savedPositions={savedPositions} />
-        <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
+        <Buttons
+          handleClearAll={handleClearAll}
+          handleSave={handleSave}
+          handleRemoveLast={handleRemoveLast}
+          handleToggleArrows={() => setShowArrows((prev) => !prev)}
+        />
       </div>
     </div>
   );
@@ -99,6 +106,7 @@ const styles = {
     width: '100%',
     height: '70vh',
     backgroundColor: '#F5F5DC',
+    paddingBottom: '9vh',
   },
   topTitle: {
     fontSize: '2rem', // Similar to h1
