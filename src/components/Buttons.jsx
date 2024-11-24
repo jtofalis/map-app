@@ -1,10 +1,14 @@
 import AddIcon from '@mui/icons-material/Add';
-import CompareArrows from '@mui/icons-material/CompareArrows';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UndoIcon from '@mui/icons-material/Undo';
 import { Button } from '@mui/material';
+import React from 'react';
 
-const Buttons = ({handleSave, handleRemoveLast, handleClearAll, handleToggleArrows}) => {
+const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, showArrows }) => {
+  const handleChange = (e) => {
+    setShowArrows(e.target.checked);
+  };
+
   return (
     <div
       style={{
@@ -50,17 +54,65 @@ const Buttons = ({handleSave, handleRemoveLast, handleClearAll, handleToggleArro
       >
         Clear
       </Button>
-      <Button
-        size='large'
-        variant='contained'
-        color='#dcf5e9'
-        startIcon={<CompareArrows />}
-        onClick={handleToggleArrows}
-        aria-label='Toggle Arrows'
-      >
-        Toggle Arrows
-      </Button>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+        <div
+          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
+          onClick={() => {
+            const newValue = !showArrows;
+            setShowArrows(newValue);
+          }}
+        >
+          <input
+            type='checkbox'
+            onChange={handleChange}
+            checked={showArrows}
+            style={{
+              opacity: 0,
+              width: '0',
+              height: '0',
+              position: 'absolute',
+            }}
+          />
+          <span
+            style={{
+              position: 'absolute',
+              cursor: 'pointer',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: showArrows ? '#2196F3' : '#ccc',
+              transition: 'background-color 0.2s',
+              borderRadius: '34px',
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute',
+                content: '""',
+                height: '16px',
+                width: '16px',
+                left: showArrows ? '22px' : '2px',
+                bottom: '2px',
+                backgroundColor: 'white',
+                transition: '0.2s',
+                borderRadius: '50%',
+              }}
+            />
+          </span>
+        </div>
+        <label
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            const newValue = !showArrows;
+            setShowArrows(newValue);
+          }}
+        >
+          Toggle Arrows
+        </label>
+      </div>
     </div>
   );
 };
+
 export default Buttons;

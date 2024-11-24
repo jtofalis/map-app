@@ -11,7 +11,6 @@ import FrisbeePitch from './components/FrisbeePitch';
 import PieChart from './components/PieChart';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
-import PositionSummary from './components/PositionSummary';
 import SavedPositionsLines from './components/SavedPositionsLines';
 
 const UltimateFrisbeePitch = () => {
@@ -54,8 +53,6 @@ const UltimateFrisbeePitch = () => {
     setTitle(e.target.value);
   };
 
-  console.log(savedPositions);
-
   return (
     <div style={styles.top70}>
       <input type='text' placeholder='TEAM 1 VS TEAM 2' value={title} onChange={handleChange} style={styles.topTitle} />
@@ -72,13 +69,13 @@ const UltimateFrisbeePitch = () => {
         <PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />
         <PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />
       </FrisbeePitch>
-      <PositionSummary savedPositions={savedPositions} />
       <PieChart savedPositions={savedPositions} />
       <Buttons
         handleClearAll={handleClearAll}
         handleSave={handleSave}
         handleRemoveLast={handleRemoveLast}
-        handleToggleArrows={() => setShowArrows((prev) => !prev)}
+        setShowArrows={setShowArrows}
+        showArrows={showArrows}
       />
     </div>
   );
