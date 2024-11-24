@@ -12,10 +12,12 @@ const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
   return (
     <div style={{
       width: '100%', 
-      padding: '10px',
+      height: '10vh',
+      padding: '0px 10px',
       display: 'flex',
-      minHeight: '30px'}}>
-
+      minHeight: '40px'}}>
+<div>
+<h3>Distribution</h3>
     <PieChart
       style={{ 
         marginInline: 'auto'}}
@@ -25,6 +27,7 @@ const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
         { title: 'Short', value: shortValue, color: '#354f52' },
       ]}
       />
+      </div>
       </div>
   );
 };

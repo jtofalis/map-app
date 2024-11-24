@@ -1,9 +1,18 @@
 const FrisbeePitch = ({ children }) => {
+  const coneStyle = {
+    width: 0,
+    height: 0,
+    borderLeft: '5px solid transparent',
+    borderRight: '5px solid transparent',
+    borderBottom: '10px solid orange',
+    position: 'absolute',
+  };
+
   return (
     <div
       style={{
-        width: '300px',
-        height: '500px',
+        width: '60vw',
+        height: '55vh',
         backgroundColor: '#6BA368',
         position: 'relative',
         margin: '20px auto',
@@ -11,6 +20,7 @@ const FrisbeePitch = ({ children }) => {
         borderRadius: '10px',
       }}
     >
+      {/* Attacking End Zone */}
       <div
         style={{
           width: '100%',
@@ -26,6 +36,8 @@ const FrisbeePitch = ({ children }) => {
       >
         Attacking End Zone
       </div>
+
+      {/* Midline */}
       <div
         style={{
           width: '100%',
@@ -37,6 +49,8 @@ const FrisbeePitch = ({ children }) => {
           transform: 'translateY(-50%)',
         }}
       ></div>
+
+      {/* Defending End Zone */}
       <div
         style={{
           width: '100%',
@@ -52,6 +66,25 @@ const FrisbeePitch = ({ children }) => {
       >
         Defending End Zone
       </div>
+
+      {/* Cones */}
+      {/* Top Left */}
+      <div style={{ ...coneStyle, top: '5px', left: '5px' }}></div>
+      {/* Top Right */}
+      <div style={{ ...coneStyle, top: '5px', right: '5px' }}></div>
+      {/* Bottom Left */}
+      <div style={{ ...coneStyle, bottom: '5px', left: '5px' }}></div>
+      {/* Bottom Right */}
+      <div style={{ ...coneStyle, bottom: '5px', right: '5px' }}></div>
+      {/* Top End Zone - Front Left */}
+      <div style={{ ...coneStyle, top: '80px', left: '5px' }}></div>
+      {/* Top End Zone - Front Right */}
+      <div style={{ ...coneStyle, top: '80px', right: '5px' }}></div>
+      {/* Bottom End Zone - Front Left */}
+      <div style={{ ...coneStyle, bottom: '80px', left: '5px' }}></div>
+      {/* Bottom End Zone - Front Right */}
+      <div style={{ ...coneStyle, bottom: '80px', right: '5px' }}></div>
+
       {children}
     </div>
   );
