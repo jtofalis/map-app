@@ -1,5 +1,5 @@
 const PositionHeatmapPoint = ({x,y, throwerOrCatcher}) => {
-  const color = throwerOrCatcher === 'thrower' ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 255, 0.2)'
+  const color = throwerOrCatcher === 'thrower' ? 'rgba(0, 0, 255, 0.1)' : 'rgba(255, 0, 0, 0.25)'
   return (
     <div
     style={{
