@@ -15,7 +15,6 @@ import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
 
-
 const UltimateFrisbeePitch = () => {
  // State to track the positions of the draggable elements
  const [positions, setPositions] = useState({
@@ -102,30 +101,26 @@ const UltimateFrisbeePitch = () => {
 
 
 const styles = {
- liveinfo: {
-   textAlign: 'center',
-   fontSize: '16px',
-   marginTop: '20px',
- },
- savedinfo: {
+info: {
    textAlign: 'center',
    marginBottom: '100px',
    fontSize: '16px',
    marginTop: '20px',
  },
  top70: {
-   width: '100%',
-   position: 'fixed',
-   height: '70vh',
-   backgroundColor: '#F5F5DC',
-   paddingBottom: '9vh',
+    width: '100%',
+    fontFamily: "Helvetica",
+    position: 'fixed',
+    height: '70vh',
+    backgroundColor: '#2f3e46',
+    paddingBottom: '9vh',
  },
  mid20: {
-   width: '100%',
-   height: '20vh',
-   backgroundColor: '#dcdcf5',
-     display: 'grid',
-     gridTemplateColumns: 'repeat(2, 1fr)',
+  width: '100%',
+  height: '20vh',
+  backgroundColor: '#cad2c5',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
  },
  topTitle: {
    fontSize: '2rem', // Similar to h1
@@ -139,6 +134,7 @@ const styles = {
    backgroundColor: 'transparent', // Transparent background for a cleaner look
  },
 };
+
 
 
 export default UltimateFrisbeePitch;
