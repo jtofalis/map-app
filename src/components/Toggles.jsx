@@ -13,9 +13,10 @@ const Toggle = ({setShowArrows, showArrows }) => {
         right: 0,
         display: 'grid',
         gridTemplateColumns: 'repeat(, 1fr)',
+        fontFamily: "Helvetica",
+        color: '#2f3e46',
         justifyContent: 'space-between',
         padding: '10px',
-        backgroundColor: 'white',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
@@ -66,7 +67,7 @@ const Toggle = ({setShowArrows, showArrows }) => {
           </span>
         </div>
         <label
-          style={{ cursor: 'pointer' }}
+          style={{cursor: 'pointer'}}
           onClick={() => {
             const newValue = !showArrows;
             setShowArrows(newValue);

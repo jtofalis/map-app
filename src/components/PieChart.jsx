@@ -10,14 +10,19 @@ const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
   const shortValue = categories.filter((category) => category === 'short').length;
 
   return (
-    <div style={{width: '100%', display: 'flex', minHeight: '30px'}}>
+    <div style={{
+      width: '100%', 
+      padding: '10px',
+      display: 'flex',
+      minHeight: '30px'}}>
 
     <PieChart
-      style={{maxWidth: '200px', marginInline: 'auto'}}
+      style={{ 
+        marginInline: 'auto'}}
       data={[
-        { title: 'Long', value: longValue, color: '#E38627' },
-        { title: 'Medium', value: mediumValue, color: '#C13C37' },
-        { title: 'Short', value: shortValue, color: '#6A2135' },
+        { title: 'Long', value: longValue, color: '#84a98c' },
+        { title: 'Medium', value: mediumValue, color: '#52796f' },
+        { title: 'Short', value: shortValue, color: '#354f52' },
       ]}
       />
       </div>
