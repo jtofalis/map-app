@@ -1,60 +1,24 @@
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import UndoIcon from '@mui/icons-material/Undo';
-import { Button } from '@mui/material';
 import React from 'react';
 
-const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, showArrows }) => {
-  const handleChange = (e) => {
+const Toggle = ({setShowArrows, showArrows }) => {
+  const handleArrowChange = (e) => {
     setShowArrows(e.target.checked);
   };
-
   return (
     <div
       style={{
         background: '#dcf5f5',
-        position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: 'repeat(, 1fr)',
         justifyContent: 'space-between',
         padding: '10px',
         backgroundColor: 'white',
       }}
     >
-      <Button
-        size='large'
-        variant='contained'
-        color='white'
-        startIcon={<AddIcon />}
-        onClick={handleSave}
-        aria-label='clear all'
-      >
-        Add
-      </Button>
-      <Button
-        size='large'
-        variant='contained'
-        color='#dcf5e9'
-        startIcon={<UndoIcon />}
-        onClick={handleRemoveLast}
-        aria-label='clear all'
-      >
-        Undo
-      </Button>
-      <Button
-        size='large'
-        variant='contained'
-        color='#dcf5e9'
-        startIcon={<DeleteIcon />}
-        onClick={handleClearAll}
-        aria-label='clear all'
-      >
-        Clear
-      </Button>
-      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
         <div
           style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
           onClick={() => {
@@ -64,7 +28,7 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, 
         >
           <input
             type='checkbox'
-            onChange={handleChange}
+            onChange={handleArrowChange}
             checked={showArrows}
             style={{
               opacity: 0,
@@ -108,11 +72,11 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, 
             setShowArrows(newValue);
           }}
         >
-          Toggle Arrows
+          Show Markings
         </label>
-      </div> */}
+      </div>
     </div>
   );
 };
 
-export default Buttons;
+export default Toggle;

@@ -10,7 +10,7 @@ const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
   const shortValue = categories.filter((category) => category === 'short').length;
 
   return (
-    <div style={{width: '100%', display: 'flex', minHeight: '350px'}}>
+    <div style={{width: '100%', display: 'flex', minHeight: '30px'}}>
 
     <PieChart
       style={{maxWidth: '200px', marginInline: 'auto'}}
