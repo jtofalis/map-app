@@ -1,10 +1,14 @@
-// // Wide border around pitch
-// // cones?
-// // save button saves as file
-// Estimated analysis
-// toggle arrows
-// all negative or level is it's own thing?
-
+// Things to add:
+//
+// cones?
+// Estimated analysis title and key
+// seperate toggle for showing players/arrows
+// acceptable on desktop
+// help button
+// ultimate insights logon the pitch 
+// unable to add if hidden or 0, 0 and 0,0
+// add border to mid20 and top70
+// default place
 
 import React, { Fragment, useState } from 'react';
 import Buttons from './components/Buttons';
@@ -23,7 +27,8 @@ const UltimateFrisbeePitch = () => {
  });
 
 
- const [showArrows, setShowArrows] = useState(true);
+  const [showArrows, setShowArrows] = useState(true);
+  const [showPlayers, setShowPlayers] = useState(true);
 
 
  // State to track a list of saved positions
@@ -72,28 +77,26 @@ const UltimateFrisbeePitch = () => {
 
        {savedPositions.map((savedPos, index) => (
          <Fragment key={index}>
-           <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
            <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
+           <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
          </Fragment>
        ))}
 
 
-      {showArrows &&<PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />}
-      {showArrows &&<PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />}
+      {showPlayers &&<PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />}
+      {showPlayers &&<PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />}
      </FrisbeePitch>
      <div style={styles.mid20}>
      <PieChart savedPositions={savedPositions} />
-      <Toggle
-        setShowArrows={setShowArrows}
-        showArrows={showArrows}
-      />
+      <Toggle setShowPlayers={setShowPlayers} showPlayers={showPlayers} 
+              setShowArrows={setShowArrows} showArrows={showArrows}/>
       
       </div>
       <Buttons
         handleClearAll={handleClearAll}
         handleSave={handleSave}
         handleRemoveLast={handleRemoveLast}
-        setShowArrows={setShowArrows}
+        //setShowArrows={setShowArrows}
       />
     </div>
  );
@@ -130,12 +133,11 @@ info: {
    textAlign: 'center',
    fontWeight: 'bold',
    border: 'none', // Remove the box
+   color: 'white',
    outline: 'none', // Remove focus border
    backgroundColor: 'transparent', // Transparent background for a cleaner look
  },
 };
-
-
 
 export default UltimateFrisbeePitch;
 
