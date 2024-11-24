@@ -15,7 +15,6 @@ import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
 
-
 const UltimateFrisbeePitch = () => {
  // State to track the positions of the draggable elements
  const [positions, setPositions] = useState({
@@ -139,6 +138,7 @@ const styles = {
    backgroundColor: 'transparent', // Transparent background for a cleaner look
  },
 };
+
 
 
 export default UltimateFrisbeePitch;

@@ -14,6 +14,7 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, 
       style={{
         background: '#dcf5f5',
         position: 'fixed',
+        height: '10vh',
         bottom: 0,
         left: 0,
         right: 0,
