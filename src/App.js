@@ -1,14 +1,8 @@
 // Things to add:
-//
-// cones?
-// Estimated analysis title and key
-// seperate toggle for showing players/arrows
-// acceptable on desktop
+// Add a key for pie chart
 // help button
-// ultimate insights logon the pitch 
-// unable to add if hidden or 0, 0 and 0,0
-// add border to mid20 and top70
-// default place
+// unable to add if players are hidden or 0, 0 and 0,0 (maybe restrict thrower from even being in the endzone?)
+// change the default starting location for players to be in the pitch
 
 import React, { Fragment, useState } from 'react';
 import Buttons from './components/Buttons';
@@ -29,6 +23,8 @@ const UltimateFrisbeePitch = () => {
 
   const [showArrows, setShowArrows] = useState(true);
   const [showPlayers, setShowPlayers] = useState(true);
+  const [showThrows, setShowThrows] = useState(true);
+  const [showCatches, setShowCatches] = useState(true);
 
 
  // State to track a list of saved positions
@@ -70,6 +66,7 @@ const UltimateFrisbeePitch = () => {
 
 
  return (
+  <div style={styles.guidline}>
    <div style={styles.top70}>
      <input type='text' placeholder='TEAM 1 VS TEAM 2' value={title} onChange={handleTitleChange} style={styles.topTitle} />
      <FrisbeePitch>
@@ -77,8 +74,8 @@ const UltimateFrisbeePitch = () => {
 
        {savedPositions.map((savedPos, index) => (
          <Fragment key={index}>
-           <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
-           <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
+           {showCatches && <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />}
+           {showThrows &&<PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />}
          </Fragment>
        ))}
 
@@ -89,31 +86,34 @@ const UltimateFrisbeePitch = () => {
      <div style={styles.mid20}>
      <PieChart savedPositions={savedPositions} />
       <Toggle setShowPlayers={setShowPlayers} showPlayers={showPlayers} 
-              setShowArrows={setShowArrows} showArrows={showArrows}/>
+              setShowArrows={setShowArrows} showArrows={showArrows}
+              setShowThrows={setShowThrows} showThrows={showThrows}
+              setShowCatches={setShowCatches} showCatches={showCatches}
+              />
       
       </div>
       <Buttons
         handleClearAll={handleClearAll}
         handleSave={handleSave}
         handleRemoveLast={handleRemoveLast}
-        //setShowArrows={setShowArrows}
       />
+    </div>
     </div>
  );
 };
 
 
 const styles = {
-info: {
-   textAlign: 'center',
-   marginBottom: '100px',
-   fontSize: '16px',
-   marginTop: '20px',
- },
+guidline: {
+  width: '375px', /* iPhone screen width */
+  height: '812px', /* iPhone screen height */
+  overflow: 'hidden', /* Ensures content stays inside rounded edges */
+  position: 'relative', /* For further child positioning */
+  margin: '20px auto' /* Center on the page horizontally */
+},
  top70: {
     width: '100%',
     fontFamily: "Helvetica",
-    position: 'fixed',
     height: '70vh',
     backgroundColor: '#2f3e46',
     paddingBottom: '9vh',
@@ -121,6 +121,7 @@ info: {
  mid20: {
   width: '100%',
   height: '20vh',
+  margin: '0px 0px 100px 0px',
   backgroundColor: '#cad2c5',
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
