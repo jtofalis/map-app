@@ -29,6 +29,7 @@ const Toggle = ({setShowArrows, showArrows,
         fontFamily: "Helvetica",
         color: '#2f3e46',
         justifyContent: 'space-between',
+        paddingBottom: '50px'
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
@@ -151,12 +152,6 @@ const Toggle = ({setShowArrows, showArrows,
           Show Throws
         </label>
       </div>
-
-
-
-
-
-
 
 
 

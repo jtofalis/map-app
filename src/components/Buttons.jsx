@@ -14,7 +14,7 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, 
       style={{
         background: '#dcf5f5',
         position: 'fixed',
-        height: '10vh',
+        height: '7vh',
         bottom: 0,
         left: 0,
         right: 0,
@@ -55,63 +55,6 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, 
       >
         Clear
       </Button>
-      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
-          onClick={() => {
-            const newValue = !showArrows;
-            setShowArrows(newValue);
-          }}
-        >
-          <input
-            type='checkbox'
-            onChange={handleChange}
-            checked={showArrows}
-            style={{
-              opacity: 0,
-              width: '0',
-              height: '0',
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: showArrows ? '#2196F3' : '#ccc',
-              transition: 'background-color 0.2s',
-              borderRadius: '34px',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                content: '""',
-                height: '16px',
-                width: '16px',
-                left: showArrows ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-              }}
-            />
-          </span>
-        </div>
-        <label
-          style={{ cursor: 'pointer' }}
-          onClick={() => {
-            const newValue = !showArrows;
-            setShowArrows(newValue);
-          }}
-        >
-          Toggle Arrows
-        </label>
-      </div> */}
     </div>
   );
 };
