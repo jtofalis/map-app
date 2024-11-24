@@ -22,9 +22,6 @@ const Toggle = ({setShowArrows, showArrows, setShowPlayers, showPlayers}) => {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-        
-        
-        
         <div
           style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
           onClick={() => {
