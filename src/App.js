@@ -1,5 +1,5 @@
 // Things to add:
-// Add a key for pie chart
+
 // help button
 // unable to add if players are hidden or 0, 0 and 0,0 (maybe restrict thrower from even being in the endzone?)
 // change the default starting location for players to be in the pitch
@@ -56,9 +56,7 @@ const UltimateFrisbeePitch = () => {
    setSavedPositions([]);
  };
 
-
  const [title, setTitle] = useState('');
-
 
  const handleTitleChange = (e) => {
    setTitle(e.target.value);
@@ -79,12 +77,11 @@ const UltimateFrisbeePitch = () => {
          </Fragment>
        ))}
 
-
       {showPlayers &&<PlayerDot player='catcher' onDrag={(e, data) => handleDrag('catcher', e, data)} />}
       {showPlayers &&<PlayerDot player='thrower' onDrag={(e, data) => handleDrag('thrower', e, data)} />}
      </FrisbeePitch>
-     <div style={styles.mid20}>
      <PieChart savedPositions={savedPositions} />
+     <div style={styles.mid20}>
       <Toggle setShowPlayers={setShowPlayers} showPlayers={showPlayers} 
               setShowArrows={setShowArrows} showArrows={showArrows}
               setShowThrows={setShowThrows} showThrows={showThrows}
@@ -101,7 +98,6 @@ const UltimateFrisbeePitch = () => {
     </div>
  );
 };
-
 
 const styles = {
 guidline: {
@@ -123,8 +119,7 @@ guidline: {
   height: '20vh',
   margin: '0px 0px 100px 0px',
   backgroundColor: '#cad2c5',
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
+  display: 'grid'
  },
  topTitle: {
    fontSize: '2rem', // Similar to h1
@@ -139,8 +134,10 @@ guidline: {
    backgroundColor: 'transparent', // Transparent background for a cleaner look
  },
 };
-
 export default UltimateFrisbeePitch;
+
+
+
 
 
 
