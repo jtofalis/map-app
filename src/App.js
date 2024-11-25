@@ -5,7 +5,8 @@ import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
-import Toggle from './components/Toggles';
+import ToggleLeft from './components/Toggles/TogglesLeft';
+import ToggleRight from './components/Toggles/TogglesRight';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -45,7 +46,7 @@ const UltimateFrisbeePitch = () => {
 
   return (
     <>
-      <div className='w-full h-[70vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
+      <div className='w-full h-[75vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
         <input
           type='text'
           placeholder='TEAM 1 VS TEAM 2'
@@ -86,18 +87,25 @@ const UltimateFrisbeePitch = () => {
 
         <BarChart savedPositions={savedPositions} />
 
-        <div className='w-full h-[20vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid'>
-          <Toggle
-            setShowPlayers={setShowPlayers}
-            showPlayers={showPlayers}
-            setShowArrows={setShowArrows}
-            showArrows={showArrows}
-            setShowThrows={setShowThrows}
-            showThrows={showThrows}
-            setShowCatches={setShowCatches}
-            showCatches={showCatches}
-          />
-        </div>
+        <div className="w-full h-[10vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid grid-cols-2">
+  <div className="flex justify-center items-center">
+    <ToggleLeft
+      setShowPlayers={setShowPlayers}
+      showPlayers={showPlayers}
+      setShowArrows={setShowArrows}
+      showArrows={showArrows}
+    />
+  </div>
+  <div className="flex justify-center items-center">
+    <ToggleRight
+      setShowThrows={setShowThrows}
+      showThrows={showThrows}
+      setShowCatches={setShowCatches}
+      showCatches={showCatches}
+    />
+  </div>
+</div>
+
       </div>
       <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
     </>
