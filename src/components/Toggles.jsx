@@ -65,7 +65,7 @@ const Toggle = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto ">
+    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto pb-24">
       {toggles.map((toggle, index) => (
         <ToggleSwitch
           key={index}
