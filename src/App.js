@@ -9,7 +9,7 @@ import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
-    thrower: { x: 95, y: 320 },
+    thrower: { x: 95, y: 300 },
     catcher: { x: 95, y: 50 },
   });
 
@@ -44,7 +44,7 @@ const UltimateFrisbeePitch = () => {
   };
 
   return (
-    <div className='w-screen h-screen overflow-hidden relative mx-auto my-5'>
+    <>
       <div className='w-full h-[70vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
         <input
           type='text'
@@ -98,10 +98,9 @@ const UltimateFrisbeePitch = () => {
             showCatches={showCatches}
           />
         </div>
-
-        <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
       </div>
-    </div>
+      <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
+    </>
   );
 };
 

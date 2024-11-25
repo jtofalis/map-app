@@ -15,20 +15,22 @@ const FrisbeePitch = ({ children }) => {
   ];
 
   return (
-    <div className='w-[60vw] h-[55vh] bg-[#6BA368] relative mx-auto my-5 border-5 border-white rounded-lg'>
-      {/* End Zones */}
-      <EndZone position='top-0' text='Attacking End Zone' />
-      <EndZone position='bottom-0' text='Defending End Zone' />
+    <div className='px-2'>
+      <div className='max-w-sm h-[55vh] bg-[#6BA368] relative mx-auto my-5 border-5 border-white rounded-lg'>
+        {/* End Zones */}
+        <EndZone position='top-0' text='Attacking End Zone' />
+        <EndZone position='bottom-0' text='Defending End Zone' />
 
-      {/* Midline */}
-      <div className='w-full h-0.5 bg-white absolute top-1/2 left-0 -translate-y-1/2' />
+        {/* Midline */}
+        <div className='w-full h-0.5 bg-white absolute top-1/2 left-0 -translate-y-1/2' />
 
-      {/* Cones */}
-      {conePositions.map((position) => (
-        <Cone key={position} position={position} />
-      ))}
+        {/* Cones */}
+        {conePositions.map((position) => (
+          <Cone key={position} position={position} />
+        ))}
 
-      {children}
+        {children}
+      </div>
     </div>
   );
 };
