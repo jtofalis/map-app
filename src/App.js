@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
-import FrisbeePitch from './components/FrisbeePitch';
+import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
