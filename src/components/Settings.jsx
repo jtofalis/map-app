@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import SettingsIcon from '@mui/icons-material/Settings';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import SettingsIcon from '@mui/icons-material/Settings';
+import React, { useState } from 'react';
 
 const FloatingSettingsCog = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -18,12 +18,7 @@ const FloatingSettingsCog = () => {
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        top: 16, // Adjust as needed
-        right: 16, // Adjust as needed
-        zIndex: 1300, // Ensure it stays above other elements
-      }}
+      className='fixed top-4 right-4 z-50'
     >
       <IconButton
         color="primary"

@@ -1,40 +1,20 @@
+import React from 'react';
 import Draggable from 'react-draggable';
 
-const PlayerDot = ({ onDrag, player }) => {
+const PlayerDot = ({ onDrag, player, defaultPosition }) => {
   const imageSrc = player === 'thrower' ? 'thrower.png' : 'catcher.png';
+  const playerLabel = player === 'thrower' ? 'Thrower' : 'Catcher';
 
   return (
-    <Draggable bounds="parent" onDrag={onDrag}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          position: 'absolute',
-          cursor: 'pointer',
-        }}
-      >
-        {/* Draggable image */}
+    <Draggable bounds="parent" onDrag={onDrag} defaultPosition={defaultPosition}>
+      <div className="flex flex-col items-center absolute cursor-pointer">
         <img
           src={imageSrc}
-          alt={player === 'thrower' ? 'Thrower' : 'Catcher'}
-          style={{
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-          }}
+          alt={playerLabel}
+          className="w-12 h-12 rounded-full"
         />
-        {/* Text underneath */}
-        <span
-          style={{
-            marginTop: '5px',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '12px',
-            textAlign: 'center',
-          }}
-        >
-          {player === 'thrower' ? 'Thrower' : 'Catcher'}
+        <span className="text-white font-bold text-xs text-center -mt-1">
+          {playerLabel}
         </span>
       </div>
     </Draggable>
