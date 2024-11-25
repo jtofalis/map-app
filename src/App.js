@@ -5,8 +5,7 @@ import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
-import ToggleLeft from './components/Toggles/TogglesLeft';
-import ToggleRight from './components/Toggles/TogglesRight';
+import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -87,25 +86,18 @@ const UltimateFrisbeePitch = () => {
 
         <BarChart savedPositions={savedPositions} />
 
-        <div className="w-full h-[10vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid grid-cols-2">
-  <div className="flex justify-center items-center">
-    <ToggleLeft
-      setShowPlayers={setShowPlayers}
-      showPlayers={showPlayers}
-      setShowArrows={setShowArrows}
-      showArrows={showArrows}
-    />
-  </div>
-  <div className="flex justify-center items-center">
-    <ToggleRight
-      setShowThrows={setShowThrows}
-      showThrows={showThrows}
-      setShowCatches={setShowCatches}
-      showCatches={showCatches}
-    />
-  </div>
-</div>
-
+        <div className='w-full h-[10vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid grid-cols-2'>
+          <Toggle
+            setShowArrows={setShowArrows}
+            showArrows={showArrows}
+            setShowPlayers={setShowPlayers}
+            showPlayers={showPlayers}
+            setShowThrows={setShowThrows}
+            showThrows={showThrows}
+            setShowCatches={setShowCatches}
+            showCatches={showCatches}
+          />
+        </div>
       </div>
       <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
     </>
