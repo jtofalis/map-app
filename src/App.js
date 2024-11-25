@@ -6,6 +6,7 @@ import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
 import Toggle from './components/Toggles';
+import Title from './components/Title';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
