@@ -86,18 +86,16 @@ const UltimateFrisbeePitch = () => {
 
         <BarChart savedPositions={savedPositions} />
 
-        <div className='w-full h-[10vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid grid-cols-2'>
-          <Toggle
-            setShowArrows={setShowArrows}
-            showArrows={showArrows}
-            setShowPlayers={setShowPlayers}
-            showPlayers={showPlayers}
-            setShowThrows={setShowThrows}
-            showThrows={showThrows}
-            setShowCatches={setShowCatches}
-            showCatches={showCatches}
-          />
-        </div>
+        <Toggle
+          setShowArrows={setShowArrows}
+          showArrows={showArrows}
+          setShowPlayers={setShowPlayers}
+          showPlayers={showPlayers}
+          setShowThrows={setShowThrows}
+          showThrows={showThrows}
+          setShowCatches={setShowCatches}
+          showCatches={showCatches}
+        />
       </div>
       <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
     </>

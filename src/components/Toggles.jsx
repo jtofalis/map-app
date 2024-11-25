@@ -2,7 +2,7 @@ import React from 'react';
 
 const ToggleSwitch = ({ label, isChecked, onChange }) => {
   return (
-    <div className="flex items-center justify-start gap-2">
+    <div className="flex items-center justify-start gap-2 max-w-fit">
       <div
         className="relative inline-block w-10 h-5"
         onClick={() => onChange(!isChecked)}
@@ -65,7 +65,7 @@ const Toggle = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12">
+    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto ">
       {toggles.map((toggle, index) => (
         <ToggleSwitch
           key={index}
