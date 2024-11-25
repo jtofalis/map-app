@@ -1,282 +1,81 @@
 import React from 'react';
 
-const Toggle = ({setShowArrows, showArrows, 
-                 setShowPlayers, showPlayers, 
-                 setShowThrows, showThrows, 
-                 setShowCatches, showCatches}) => {
-  
-  const handleArrowChange = (e) => {
-    setShowArrows(e.target.checked);
-  };
+const ToggleSwitch = ({ label, isChecked, onChange }) => {
+  return (
+    <div className="flex items-center justify-start gap-2">
+      <div
+        className="relative inline-block w-10 h-5"
+        onClick={() => onChange(!isChecked)}
+      >
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={(e) => onChange(e.target.checked)}
+          className="opacity-0 w-0 h-0 absolute"
+        />
+        <span className={`absolute cursor-pointer inset-0 rounded-full transition-colors duration-200 ${
+          isChecked ? 'bg-blue-500' : 'bg-black'
+        }`}>
+          <span className={`absolute h-4 w-4 bottom-0.5 bg-white rounded-full transition-all duration-200 ${
+            isChecked ? 'left-[22px]' : 'left-0.5'
+          }`} />
+        </span>
+      </div>
+      <label
+        className="cursor-pointer text-[#2f3e46]"
+        onClick={() => onChange(!isChecked)}
+      >
+        {label}
+      </label>
+    </div>
+  );
+};
 
-  const handlePlayerChange = (e) => {
-    setShowPlayers(e.target.checked);
-  };
-
-  const handleThrowsChange = (e) => {
-    setShowThrows(e.target.checked);
-  };
-
-  const handleCatchesChange = (e) => {
-    setShowCatches(e.target.checked);
-  };
-
+const Toggle = ({
+  setShowArrows,
+  showArrows,
+  setShowPlayers,
+  showPlayers,
+  setShowThrows,
+  showThrows,
+  setShowCatches,
+  showCatches,
+}) => {
+  const toggles = [
+    {
+      label: "Show Players",
+      isChecked: showPlayers,
+      onChange: setShowPlayers
+    },
+    {
+      label: "Show Throws",
+      isChecked: showThrows,
+      onChange: setShowThrows
+    },
+    {
+      label: "Show Catches",
+      isChecked: showCatches,
+      onChange: setShowCatches
+    },
+    {
+      label: "Show Arrows",
+      isChecked: showArrows,
+      onChange: setShowArrows
+    }
+  ];
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        fontFamily: "Helvetica",
-        color: '#2f3e46',
-        justifyContent: 'space-between',
-        paddingBottom: '50px'
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
-          onClick={() => {
-            const newValue = !showPlayers;
-            setShowPlayers(newValue);
-          }}>
-          <input
-            type='checkbox'
-            onChange={handlePlayerChange}
-            checked={showPlayers}
-            style={{
-              opacity: 0,
-              width: '0',
-              height: '0',
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: showPlayers ? '#2196F3' : 'black',
-              transition: 'background-color 0.2s',
-              borderRadius: '34px',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                content: '""',
-                height: '16px',
-                width: '16px',
-                left: showPlayers ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-              }}
-            />
-          </span>
-        </div>
-        <label
-          style={{cursor: 'pointer'}}
-          onClick={() => {
-            const newValue = !showPlayers;
-            setShowPlayers(newValue);
-          }}
-        >
-          Show Players
-        </label>
-      </div>
-      
-      
-      
-      
-      
-      {/* Throws */}
-      <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
-          onClick={() => {
-            const newValue = !showThrows;
-            setShowThrows(newValue);
-          }}>
-
-            
-          <input
-            type='checkbox'
-            onChange={handleThrowsChange}
-            checked={showThrows}
-            style={{
-              opacity: 0,
-              width: '0',
-              height: '0',
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: showThrows ? '#2196F3' : 'black',
-              transition: 'background-color 0.2s',
-              borderRadius: '34px',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                content: '""',
-                height: '16px',
-                width: '16px',
-                left: showThrows ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-              }}
-            />
-          </span>
-        </div>
-        <label
-          style={{cursor: 'pointer'}}
-          onClick={() => {
-            const newValue = !showThrows;
-            setShowThrows(newValue);
-          }}
-        >
-          Show Throws
-        </label>
-      </div>
-
-
-
-
-
-
-
-{/* Catches */}
-      <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
-          onClick={() => {
-            const newValue = !showCatches;
-            setShowCatches(newValue);
-          }}>
-          <input
-            type='checkbox'
-            onChange={handleCatchesChange}
-            checked={showCatches}
-            style={{
-              opacity: 0,
-              width: '0',
-              height: '0',
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: showCatches ? '#2196F3' : 'black',
-              transition: 'background-color 0.2s',
-              borderRadius: '34px',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                content: '""',
-                height: '16px',
-                width: '16px',
-                left: showCatches ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-              }}
-            />
-          </span>
-        </div>
-        <label
-          style={{cursor: 'pointer'}}
-          onClick={() => {
-            const newValue = !showCatches;
-            setShowCatches(newValue);
-          }}
-        >
-          Show Catches
-        </label>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{ position: 'relative', display: 'inline-block', width: '40px', height: '20px' }}
-          onClick={() => {
-            const newValue = !showArrows;
-            setShowArrows(newValue);
-          }}>
-          <input
-            type='checkbox'
-            onChange={handleArrowChange}
-            checked={showArrows}
-            style={{
-              opacity: 0,
-              width: '0',
-              height: '0',
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: showArrows ? '#2196F3' : 'black',
-              transition: 'background-color 0.2s',
-              borderRadius: '34px',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                content: '""',
-                height: '16px',
-                width: '16px',
-                left: showArrows ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-              }}
-            />
-          </span>
-        </div>
-        <label
-          style={{cursor: 'pointer'}}
-          onClick={() => {
-            const newValue = !showArrows;
-            setShowArrows(newValue);
-          }}
-        >
-          Show Arrows
-        </label>
-      </div>
-
-
+    <div className="grid font-helvetica text-[#2f3e46] justify-between pb-12">
+      {toggles.map((toggle, index) => (
+        <ToggleSwitch
+          key={index}
+          label={toggle.label}
+          isChecked={toggle.isChecked}
+          onChange={toggle.onChange}
+        />
+      ))}
     </div>
   );
 };
 
 export default Toggle;
-

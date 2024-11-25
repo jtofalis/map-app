@@ -1,11 +1,5 @@
-// Things to add:
-
-// help button
-// unable to add if players are hidden or 0, 0 and 0,0 (maybe restrict thrower from even being in the endzone?)
-// change the default starting location for players to be in the pitch
-
 import React, { Fragment, useState } from 'react';
-import BarChart from './components/BarChart';
+import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FrisbeePitch from './components/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
@@ -14,7 +8,6 @@ import SavedPositionsLines from './components/SavedPositionsLines';
 import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
-  // State to track the positions of the draggable elements
   const [positions, setPositions] = useState({
     thrower: { x: 95, y: 320 },
     catcher: { x: 95, y: 50 },
@@ -24,11 +17,9 @@ const UltimateFrisbeePitch = () => {
   const [showPlayers, setShowPlayers] = useState(true);
   const [showThrows, setShowThrows] = useState(true);
   const [showCatches, setShowCatches] = useState(true);
-
-  // State to track a list of saved positions
   const [savedPositions, setSavedPositions] = useState([]);
+  const [title, setTitle] = useState('');
 
-  // Update the position of a player
   const handleDrag = (player, e, data) => {
     setPositions((prev) => ({
       ...prev,
@@ -36,9 +27,7 @@ const UltimateFrisbeePitch = () => {
     }));
   };
 
-  // Save the current positions
   const handleSave = () => {
-    // Save the current positions to the list
     setSavedPositions((prevSaved) => [...prevSaved, { ...positions }]);
   };
 
@@ -50,22 +39,21 @@ const UltimateFrisbeePitch = () => {
     setSavedPositions([]);
   };
 
-  const [title, setTitle] = useState('');
-
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
   return (
-    <div style={styles.guidline}>
-      <div style={styles.top70}>
+    <div className='w-screen h-screen overflow-hidden relative mx-auto my-5'>
+      <div className='w-full h-[70vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
         <input
           type='text'
           placeholder='TEAM 1 VS TEAM 2'
           value={title}
           onChange={handleTitleChange}
-          style={styles.topTitle}
+          className='w-full mt-5 text-4xl text-center font-bold text-white bg-transparent border-none outline-none'
         />
+
         <FrisbeePitch>
           {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
 
@@ -95,8 +83,10 @@ const UltimateFrisbeePitch = () => {
             />
           )}
         </FrisbeePitch>
+
         <BarChart savedPositions={savedPositions} />
-        <div style={styles.mid20}>
+
+        <div className='w-full h-[20vh] my-0 mx-0 mb-24 bg-[#cad2c5] grid'>
           <Toggle
             setShowPlayers={setShowPlayers}
             showPlayers={showPlayers}
@@ -108,45 +98,11 @@ const UltimateFrisbeePitch = () => {
             showCatches={showCatches}
           />
         </div>
+
         <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
       </div>
     </div>
   );
 };
 
-const styles = {
-  guidline: {
-    width: '375px' /* iPhone screen width */,
-    height: '812px' /* iPhone screen height */,
-    overflow: 'hidden' /* Ensures content stays inside rounded edges */,
-    position: 'relative' /* For further child positioning */,
-    margin: '20px auto' /* Center on the page horizontally */,
-  },
-  top70: {
-    width: '100%',
-    fontFamily: 'Helvetica',
-    height: '70vh',
-    backgroundColor: '#2f3e46',
-    paddingBottom: '9vh',
-  },
-  mid20: {
-    width: '100%',
-    height: '20vh',
-    margin: '0px 0px 100px 0px',
-    backgroundColor: '#cad2c5',
-    display: 'grid',
-  },
-  topTitle: {
-    fontSize: '2rem', // Similar to h1
-    overflow: 'hidden',
-    width: '100%',
-    marginTop: '20px',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    border: 'none', // Remove the box
-    color: 'white',
-    outline: 'none', // Remove focus border
-    backgroundColor: 'transparent', // Transparent background for a cleaner look
-  },
-};
 export default UltimateFrisbeePitch;
