@@ -53,19 +53,19 @@ const Toggle = ({
       onChange: setShowThrows
     },
     {
-      label: "Show Catches",
-      isChecked: showCatches,
-      onChange: setShowCatches
-    },
-    {
       label: "Show Arrows",
       isChecked: showArrows,
       onChange: setShowArrows
+    },
+    {
+      label: "Show Catches",
+      isChecked: showCatches,
+      onChange: setShowCatches
     }
   ];
 
   return (
-    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto ">
+    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto pb-24">
       {toggles.map((toggle, index) => (
         <ToggleSwitch
           key={index}

@@ -6,7 +6,7 @@ import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLines from './components/SavedPositionsLines';
 import Toggle from './components/Toggles';
-import Title from './components/Title';
+import MainTitle from './components/Title';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -19,7 +19,6 @@ const UltimateFrisbeePitch = () => {
   const [showThrows, setShowThrows] = useState(true);
   const [showCatches, setShowCatches] = useState(true);
   const [savedPositions, setSavedPositions] = useState([]);
-  const [title, setTitle] = useState('');
 
   const handleDrag = (player, e, data) => {
     setPositions((prev) => ({
@@ -40,21 +39,10 @@ const UltimateFrisbeePitch = () => {
     setSavedPositions([]);
   };
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
   return (
     <>
-      <div className='w-full h-[75vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
-        <input
-          type='text'
-          placeholder='TEAM 1 VS TEAM 2'
-          value={title}
-          onChange={handleTitleChange}
-          className='w-full mt-5 text-4xl text-center font-bold text-white bg-transparent border-none outline-none'
-        />
-
+      <div className='w-full h-[80vh] font-helvetic pb-[9vh]'>
+      <MainTitle/>
         <FrisbeePitch>
           {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
 
@@ -86,7 +74,7 @@ const UltimateFrisbeePitch = () => {
         </FrisbeePitch>
 
         <BarChart savedPositions={savedPositions} />
-
+        <div>
         <Toggle
           setShowArrows={setShowArrows}
           showArrows={showArrows}
@@ -98,7 +86,10 @@ const UltimateFrisbeePitch = () => {
           showCatches={showCatches}
         />
       </div>
-      <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
+      <Buttons handleClearAll={handleClearAll} 
+               handleSave={handleSave} 
+               handleRemoveLast={handleRemoveLast} />
+               </div>
     </>
   );
 };

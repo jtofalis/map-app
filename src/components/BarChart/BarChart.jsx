@@ -17,7 +17,7 @@ const BarChart = ({ savedPositions }) => {
   );
 
   return (
-    <div className='flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden'>
+    <div className='max-w-sm flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden mx-auto my-5'>
       {['short', 'medium', 'long'].map((type) => (
         <BarSection key={type} type={type} percentage={percentages[type]} />
       ))}

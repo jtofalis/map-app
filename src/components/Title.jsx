@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const Title = () => {
+const MainTitle = () => {
   const [fontSize, setFontSize] = useState(100);
   const [text, setText] = useState('');
   const inputRef = useRef(null);
@@ -52,7 +52,7 @@ const Title = () => {
                     p-2
                     text-center
                     font-bold
-                    text-white 
+                    text-black 
                     bg-transparent 
                     border-none 
                     outline-none'
@@ -62,4 +62,4 @@ const Title = () => {
   );
 };
 
-export default Title;
+export default MainTitle;
