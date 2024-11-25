@@ -52,7 +52,7 @@ const MainTitle = () => {
                     p-2
                     text-center
                     font-bold
-                    text-white 
+                    text-black 
                     bg-transparent 
                     border-none 
                     outline-none'

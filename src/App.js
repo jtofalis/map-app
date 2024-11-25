@@ -41,7 +41,7 @@ const UltimateFrisbeePitch = () => {
 
   return (
     <>
-      <div className='w-full h-[75vh] font-helvetica bg-[#2f3e46] pb-[9vh]'>
+      <div className='w-full h-[80vh] font-helvetic pb-[9vh]'>
       <MainTitle/>
         <FrisbeePitch>
           {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
@@ -74,7 +74,7 @@ const UltimateFrisbeePitch = () => {
         </FrisbeePitch>
 
         <BarChart savedPositions={savedPositions} />
-
+        <div>
         <Toggle
           setShowArrows={setShowArrows}
           showArrows={showArrows}
@@ -86,7 +86,10 @@ const UltimateFrisbeePitch = () => {
           showCatches={showCatches}
         />
       </div>
-      <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
+      <Buttons handleClearAll={handleClearAll} 
+               handleSave={handleSave} 
+               handleRemoveLast={handleRemoveLast} />
+               </div>
     </>
   );
 };

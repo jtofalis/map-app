@@ -53,14 +53,14 @@ const Toggle = ({
       onChange: setShowThrows
     },
     {
-      label: "Show Catches",
-      isChecked: showCatches,
-      onChange: setShowCatches
-    },
-    {
       label: "Show Arrows",
       isChecked: showArrows,
       onChange: setShowArrows
+    },
+    {
+      label: "Show Catches",
+      isChecked: showCatches,
+      onChange: setShowCatches
     }
   ];
 
