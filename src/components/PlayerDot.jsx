@@ -1,10 +1,10 @@
 import Draggable from 'react-draggable';
 
-const PlayerDot = ({ onDrag, player }) => {
+const PlayerDot = ({ onDrag, player, defaultPosition }) => {
   const imageSrc = player === 'thrower' ? 'thrower.png' : 'catcher.png';
 
   return (
-    <Draggable bounds="parent" onDrag={onDrag}>
+    <Draggable bounds="parent" onDrag={onDrag} defaultPosition={defaultPosition}>
       <div
         style={{
           display: 'flex',
@@ -27,7 +27,7 @@ const PlayerDot = ({ onDrag, player }) => {
         {/* Text underneath */}
         <span
           style={{
-            marginTop: '5px',
+            marginTop: '-5px',
             color: 'white',
             fontWeight: 'bold',
             fontSize: '12px',

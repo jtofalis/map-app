@@ -4,11 +4,7 @@ import UndoIcon from '@mui/icons-material/Undo';
 import { Button } from '@mui/material';
 import React from 'react';
 
-const Buttons = ({ handleSave, handleRemoveLast, handleClearAll, setShowArrows, showArrows }) => {
-  const handleChange = (e) => {
-    setShowArrows(e.target.checked);
-  };
-
+const Buttons = ({ handleSave, handleRemoveLast, handleClearAll }) => {
   return (
     <div
       style={{

@@ -1,9 +1,8 @@
-import { PieChart } from 'react-minimal-pie-chart';
-import { getDistanceCategory } from '../utils/getDistanceCategory';
 import React from 'react';
+import { getDistanceCategory } from '../utils/getDistanceCategory';
 
 
-const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
+const BarChartByRobinHeIsAmazing = ({ savedPositions }) => {
   const categories = savedPositions.map((savedPos) => {
     return getDistanceCategory(savedPos);
   });
@@ -14,7 +13,7 @@ const PieChartByRobinHeIsAmazing = ({ savedPositions }) => {
   const longPer = longValue * 100/totalValue
   const mediumPer = mediumValue * 100/totalValue
   const shortPer = shortValue * 100/totalValue
-  
+
   return (
     <div style={styles.barContainer}>
       {shortPer > 0 && (
@@ -79,7 +78,7 @@ const styles = {
     color: 'black', // Or any color you want for the title
   }
 };
-export default PieChartByRobinHeIsAmazing;
+export default BarChartByRobinHeIsAmazing;
 
 
 
