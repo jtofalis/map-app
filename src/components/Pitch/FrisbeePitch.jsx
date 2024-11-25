@@ -16,7 +16,7 @@ const FrisbeePitch = ({ children }) => {
 
   return (
     <div className='px-2'>
-      <div className='max-w-sm h-[55vh] bg-[#6BA368] relative mx-auto my-5 border-5 border-white rounded-lg'>
+      <div className='max-w-sm h-[65vh] bg-[#6BA368] relative mx-auto my-5 border-5 border-white rounded-lg'>
         {/* End Zones */}
         <EndZone position='top-0' text='Attacking End Zone' />
         <EndZone position='bottom-0' text='Defending End Zone' />
