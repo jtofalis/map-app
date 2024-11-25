@@ -7,9 +7,9 @@ import ActionButton from './ActionButton';
 const Buttons = ({ handleSave, handleRemoveLast, handleClearAll }) => {
   const buttons = [
     {
-      label: 'Add',
-      onClick: handleSave,
-      Icon: AddIcon,
+      label: 'Clear',
+      onClick: handleClearAll,
+      Icon: DeleteIcon,
     },
     {
       label: 'Undo',
@@ -17,9 +17,9 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll }) => {
       Icon: UndoIcon,
     },
     {
-      label: 'Clear',
-      onClick: handleClearAll,
-      Icon: DeleteIcon,
+      label: 'Add',
+      onClick: handleSave,
+      Icon: AddIcon,
     },
   ];
 
