@@ -11,7 +11,7 @@ const PositionHeatmapPoint = ({ x, y, throwerOrCatcher }) => {
 
   return (
     <div
-      className="absolute w-24 h-24 rounded-full -translate-x-1/2 -translate-y-1/2 bg-no-repeat bg-cover"
+      className="absolute w-20 h-20 rounded-full -translate-x-1/2 -translate-y-1/2 bg-no-repeat bg-cover"
       style={dynamicStyles}
     />
   );

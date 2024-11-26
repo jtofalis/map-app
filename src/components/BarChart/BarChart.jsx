@@ -17,10 +17,15 @@ const BarChart = ({ savedPositions }) => {
   );
 
   return (
-    <div className='drop-shadow-xl max-w-sm flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden mx-auto my-5'>
+    <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden mx-auto my-5 relative'>
       {['short', 'medium', 'long'].map((type) => (
         <BarSection key={type} type={type} percentage={percentages[type]} />
       ))}
+      {total === 0 && (
+        <p className="text-gray-500 text-sm italic absolute inset-0 flex items-center justify-center">
+          Add throws to see distribution
+        </p>
+      )}
     </div>
   );
 };

@@ -1,37 +1,8 @@
-import React from 'react';
+import * as React from 'react';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-const ToggleSwitch = ({ label, isChecked, onChange }) => {
-  return (
-    <div className="flex items-center justify-start gap-2 max-w-fit">
-      <div
-        className="relative inline-block w-10 h-5"
-        onClick={() => onChange(!isChecked)}
-      >
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={(e) => onChange(e.target.checked)}
-          className="opacity-0 w-0 h-0 absolute"
-        />
-        <span className={`absolute cursor-pointer inset-0 rounded-full transition-colors duration-200 ${
-          isChecked ? 'bg-blue-500' : 'bg-black'
-        }`}>
-          <span className={`absolute h-4 w-4 bottom-0.5 bg-white rounded-full transition-all duration-200 ${
-            isChecked ? 'left-[22px]' : 'left-0.5'
-          }`} />
-        </span>
-      </div>
-      <label
-        className="cursor-pointer text-[#2f3e46]"
-        onClick={() => onChange(!isChecked)}
-      >
-        {label}
-      </label>
-    </div>
-  );
-};
-
-const Toggle = ({
+export default function ToggleButtonGroupComponent({
   setShowArrows,
   showArrows,
   setShowPlayers,
@@ -40,42 +11,75 @@ const Toggle = ({
   showThrows,
   setShowCatches,
   showCatches,
-}) => {
-  const toggles = [
-    {
-      label: "Show Players",
-      isChecked: showPlayers,
-      onChange: setShowPlayers
-    },
-    {
-      label: "Show Throws",
-      isChecked: showThrows,
-      onChange: setShowThrows
-    },
-    {
-      label: "Show Arrows",
-      isChecked: showArrows,
-      onChange: setShowArrows
-    },
-    {
-      label: "Show Catches",
-      isChecked: showCatches,
-      onChange: setShowCatches
-    }
-  ];
+}) {
+  // Create state variables for each toggle
+  const [alignment, setAlignment] = React.useState({
+    players: showPlayers,
+    throws: showThrows,
+    arrows: showArrows,
+    catches: showCatches,
+  });
+
+  const handleChange = (event, newAlignment) => {
+    // Update the state based on the clicked button
+    setAlignment((prev) => {
+      const newState = { ...prev, [newAlignment]: !prev[newAlignment] };
+      switch (newAlignment) {
+        case 'players':
+          setShowPlayers(!prev.players);
+          break;
+        case 'throws':
+          setShowThrows(!prev.throws);
+          break;
+        case 'arrows':
+          setShowArrows(!prev.arrows);
+          break;
+        case 'catches':
+          setShowCatches(!prev.catches);
+          break;
+        default:
+          break;
+      }
+      return newState;
+    });
+  };
 
   return (
-    <div className="grid grid-cols-2 font-helvetica text-[#2f3e46] justify-between pb-12 max-w-sm mx-auto pb-24">
-      {toggles.map((toggle, index) => (
-        <ToggleSwitch
-          key={index}
-          label={toggle.label}
-          isChecked={toggle.isChecked}
-          onChange={toggle.onChange}
-        />
-      ))}
+    <div className="flex justify-center">
+      <ToggleButtonGroup
+        color="primary"
+        exclusive
+        aria-label="show-options"
+      >
+        <ToggleButton
+          value="players"
+          selected={alignment.players}
+          onChange={handleChange}
+        >
+          Players
+        </ToggleButton>
+        <ToggleButton
+          value="arrows"
+          selected={alignment.arrows}
+          onChange={handleChange}
+        >
+          Arrows
+        </ToggleButton>
+        <ToggleButton
+          value="throws"
+          selected={alignment.throws}
+          onChange={handleChange}
+        >
+          Throws
+        </ToggleButton>
+        <ToggleButton
+          value="catches"
+          selected={alignment.catches}
+          onChange={handleChange}
+        >
+          Catches
+        </ToggleButton>
+      </ToggleButtonGroup>
     </div>
   );
-};
-
-export default Toggle;
+}

@@ -10,6 +10,9 @@ const ActionButton = ({ onClick, label, Icon }) => (
     onClick={onClick}
     aria-label={label.toLowerCase()}
     className='w-full'
+    sx={{
+      padding: '16px 32px', // Increase padding to make the button larger
+    }}
   >
     {label}
   </Button>
