@@ -7,9 +7,11 @@ const BarSection = ({ percentage, type }) => {
 
   return percentage > 0 ? (
     <div className={`h-full relative ${bgColors[type]}`} style={{ width: `${percentage}%` }}>
-      <span className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black'>
-        {type.charAt(0).toUpperCase() + type.slice(1)}
-      </span>
+      {percentage > 14.5 && (
+        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black">
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </span>
+      )}
     </div>
   ) : null;
 };
