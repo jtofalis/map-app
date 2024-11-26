@@ -1,5 +1,7 @@
 const EndZone = ({ position, text }) => (
-  <div className={`w-full h-20 bg-[#4C8C4A] absolute text-center text-white font-bold leading-[80px] ${position}`}>
+  <div
+    className={`w-full h-[12vh] bg-[#4C8C4A] absolute text-slate-100 font-bold flex items-center justify-center ${position}`}
+  >
     {text}
   </div>
 );
