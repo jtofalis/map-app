@@ -11,9 +11,9 @@ const PlayerDot = ({ onDrag, player, defaultPosition }) => {
         <img
           src={imageSrc}
           alt={playerLabel}
-          className="w-12 h-12 rounded-full translate-x-[-50%] translate-y-[-50%] pointer-events-none"
+          className="w-12 h-12 rounded-full pointer-events-none"
         />
-        <span className="text-white font-bold text-xs text-center -mt-1 translate-x-[-50%] translate-y-[-50%]">
+        <span className="text-white font-bold text-xs text-center -mt-1">
           {playerLabel}
         </span>
       </div>
