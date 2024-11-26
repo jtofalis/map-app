@@ -41,7 +41,7 @@ const UltimateFrisbeePitch = () => {
 
   return (
     <>
-      <div className='w-full h-[80vh] font-helvetic pb-[9vh]'>
+      <div className='w-full h-[120vh] font-helvetic pb-[9vh]'>
       <MainTitle/>
         <FrisbeePitch>
           {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
