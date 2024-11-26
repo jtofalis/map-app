@@ -45,41 +45,41 @@ export default function ToggleButtonGroupComponent({
   };
 
   return (
-    <div className="flex justify-center">
-      <ToggleButtonGroup
-        color="primary"
-        exclusive
-        aria-label="show-options"
-      >
-        <ToggleButton
-          value="players"
-          selected={alignment.players}
-          onChange={handleChange}
+      <div className="flex justify-center"> {/* Adjusted margin for more bottom space */}
+        <ToggleButtonGroup
+          color="primary"
+          exclusive
+          aria-label="show-options"
         >
-          Players
-        </ToggleButton>
-        <ToggleButton
-          value="arrows"
-          selected={alignment.arrows}
-          onChange={handleChange}
-        >
-          Arrows
-        </ToggleButton>
-        <ToggleButton
-          value="throws"
-          selected={alignment.throws}
-          onChange={handleChange}
-        >
-          Throws
-        </ToggleButton>
-        <ToggleButton
-          value="catches"
-          selected={alignment.catches}
-          onChange={handleChange}
-        >
-          Catches
-        </ToggleButton>
-      </ToggleButtonGroup>
-    </div>
+          <ToggleButton
+            value="players"
+            selected={alignment.players}
+            onChange={handleChange}
+          >
+            Players
+          </ToggleButton>
+          <ToggleButton
+            value="arrows"
+            selected={alignment.arrows}
+            onChange={handleChange}
+          >
+            Arrows
+          </ToggleButton>
+          <ToggleButton
+            value="throws"
+            selected={alignment.throws}
+            onChange={handleChange}
+          >
+            Throws
+          </ToggleButton>
+          <ToggleButton
+            value="catches"
+            selected={alignment.catches}
+            onChange={handleChange}
+          >
+            Catches
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </div>
   );
 }

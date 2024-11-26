@@ -2,7 +2,7 @@ import React from 'react';
 
 const SavedPositionsLines = ({ savedPositions }) => {
   return (
-    <svg className="absolute inset-0 w-full h-full">
+    <svg className="absolute inset-0 w-full h-full translate-x-[6%] translate-y-[3%]">
       <defs>
         <marker
           id="arrowhead"
@@ -11,6 +11,7 @@ const SavedPositionsLines = ({ savedPositions }) => {
           refX="9"
           refY="3.5"
           orient="auto"
+          
         >
           <polygon
             points="0 0, 10 3.5, 0 7"
