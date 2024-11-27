@@ -64,7 +64,7 @@ export default function ToggleButtonGroupComponent({
       setToggleStates(prev => ({ ...prev, numbers: false }));
       setShowNumbers(false);
     }
-  }, [showArrows]);
+  }, [showArrows, setToggleStates, setShowNumbers, toggleStates]);
 
   // Render the toggle buttons
   return (
