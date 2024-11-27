@@ -11,17 +11,13 @@ const SavedPositionsLines = ({ savedPositions }) => {
           refX="9"
           refY="3.5"
           orient="auto"
-          
         >
-          <polygon
-            points="0 0, 10 3.5, 0 7"
-            className="fill-black"
-          />
+          <polygon points="0 0, 10 3.5, 0 7" className="fill-black" />
         </marker>
       </defs>
       {savedPositions.map((save, index) => (
         <line
-          key={index}
+          key={`line-${index}`}
           x1={save.thrower.x}
           y1={save.thrower.y}
           x2={save.catcher.x}

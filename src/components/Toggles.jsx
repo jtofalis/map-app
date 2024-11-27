@@ -3,14 +3,11 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function ToggleButtonGroupComponent({
-  setShowArrows,
-  showArrows,
-  setShowPlayers,
-  showPlayers,
-  setShowThrows,
-  showThrows,
-  setShowCatches,
-  showCatches,
+  setShowArrows,  showArrows,
+  setShowPlayers, showPlayers,
+  setShowThrows,  showThrows,
+  setShowCatches, showCatches,
+  setShowNumbers, showNumbers,
 }) {
   // Create state variables for each toggle
   const [alignment, setAlignment] = React.useState({
@@ -18,6 +15,7 @@ export default function ToggleButtonGroupComponent({
     throws: showThrows,
     arrows: showArrows,
     catches: showCatches,
+    numbers: showNumbers
   });
 
   const handleChange = (event, newAlignment) => {
@@ -37,6 +35,9 @@ export default function ToggleButtonGroupComponent({
         case 'catches':
           setShowCatches(!prev.catches);
           break;
+          case 'numbers':
+            setShowNumbers(!prev.numbers);
+            break;
         default:
           break;
       }
@@ -78,6 +79,13 @@ export default function ToggleButtonGroupComponent({
             onChange={handleChange}
           >
             Catches
+          </ToggleButton>
+          <ToggleButton
+            value="numbers"
+            selected={alignment.numbers}
+            onChange={handleChange}
+          >
+            Numbers
           </ToggleButton>
         </ToggleButtonGroup>
       </div>
