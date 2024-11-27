@@ -3,9 +3,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function ToggleButtonGroupComponent({
-  setShowArrows,  showArrows,
+  setShowArrows, showArrows,
   setShowPlayers, showPlayers,
-  setShowThrows,  showThrows,
+  setShowThrows, showThrows,
   setShowCatches, showCatches,
   setShowNumbers, showNumbers,
 }) {
@@ -35,9 +35,9 @@ export default function ToggleButtonGroupComponent({
         case 'catches':
           setShowCatches(!prev.catches);
           break;
-          case 'numbers':
-            setShowNumbers(!prev.numbers);
-            break;
+        case 'numbers':
+          setShowNumbers(!prev.numbers);
+          break;
         default:
           break;
       }
@@ -46,48 +46,54 @@ export default function ToggleButtonGroupComponent({
   };
 
   return (
-      <div className="flex justify-center"> {/* Adjusted margin for more bottom space */}
-        <ToggleButtonGroup
-          color="primary"
-          exclusive
-          aria-label="show-options"
+    <div className="flex justify-center">
+      <ToggleButtonGroup className=''
+        color="primary"
+        exclusive
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',  // Allow buttons to wrap to the next line
+          gap: 1,  // Add space between buttons
+          maxWidth: '100%',  // Ensure it does not overflow the container
+          justifyContent: 'center',  // Center the buttons horizontally
+        }}
+      >
+        <ToggleButton
+          value="players"
+          selected={alignment.players}
+          onChange={handleChange}
         >
-          <ToggleButton
-            value="players"
-            selected={alignment.players}
-            onChange={handleChange}
-          >
-            Players
-          </ToggleButton>
-          <ToggleButton
-            value="arrows"
-            selected={alignment.arrows}
-            onChange={handleChange}
-          >
-            Arrows
-          </ToggleButton>
-          <ToggleButton
-            value="throws"
-            selected={alignment.throws}
-            onChange={handleChange}
-          >
-            Throws
-          </ToggleButton>
-          <ToggleButton
-            value="catches"
-            selected={alignment.catches}
-            onChange={handleChange}
-          >
-            Catches
-          </ToggleButton>
-          <ToggleButton
-            value="numbers"
-            selected={alignment.numbers}
-            onChange={handleChange}
-          >
-            Numbers
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </div>
+          Players
+        </ToggleButton>
+        <ToggleButton
+          value="arrows"
+          selected={alignment.arrows}
+          onChange={handleChange}
+        >
+          Arrows
+        </ToggleButton>
+        <ToggleButton
+          value="throws"
+          selected={alignment.throws}
+          onChange={handleChange}
+        >
+          Throws
+        </ToggleButton>
+        <ToggleButton
+          value="catches"
+          selected={alignment.catches}
+          onChange={handleChange}
+        >
+          Catches
+        </ToggleButton>
+        <ToggleButton
+          value="numbers"
+          selected={alignment.numbers}
+          onChange={handleChange}
+        >
+          Numbers
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </div>
   );
 }

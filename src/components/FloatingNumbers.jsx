@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FloatingNumbers = ({ savedPositions, onDelete }) => {
+const FloatingNumbers = ({ savedPositions }) => {
   return (
     <svg className="absolute inset-0 w-full h-full translate-x-[6%] translate-y-[3%]">
       {savedPositions.map((save, index) => {
@@ -11,7 +11,6 @@ const FloatingNumbers = ({ savedPositions, onDelete }) => {
           <g
             key={`number-${index}`}
             className="cursor-pointer"
-            onClick={() => onDelete(index)} // Call onDelete with the index
           >
             <circle cx={midX} cy={midY} r={10} className="fill-gray-200" />
             <text
