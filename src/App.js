@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
+import FloatingNumber from './components/FloatingNumber';
 import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
-import SavedPositionsLines from './components/SavedPositionsLines';
-import FloatingNumbers from './components/FloatingNumbers';
-import Toggle from './components/Toggles';
+import SavedPositionsLine from './components/SavedPositionsLine';
 import MainTitle from './components/Title';
+import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -44,16 +44,15 @@ const UltimateFrisbeePitch = () => {
   return (
     <>
       <div className='w-full h-[120vh] font-helvetic pb-[9vh]'>
-      <MainTitle/>
+        <MainTitle />
         <FrisbeePitch>
-        {showArrows && <SavedPositionsLines savedPositions={savedPositions} />}
-
           {savedPositions.map((savedPos, index) => (
             <Fragment key={(savedPositions, index)}>
               {showNumbers && (
-                <FloatingNumbers savedPositions={savedPositions}/>
+                <FloatingNumber savedPosition={savedPos} index={index} setSavedPositions={setSavedPositions} />
               )}
-            
+              {showArrows && <SavedPositionsLine savedPosition={savedPos} />}
+
               {showCatches && (
                 <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
               )}
@@ -81,18 +80,21 @@ const UltimateFrisbeePitch = () => {
 
         <BarChart savedPositions={savedPositions} />
         <div>
-        <Toggle
-          setShowArrows={setShowArrows}   showArrows={showArrows}
-          setShowPlayers={setShowPlayers} showPlayers={showPlayers}
-          setShowThrows={setShowThrows}   showThrows={showThrows}
-          setShowCatches={setShowCatches} showCatches={showCatches}
-          setShowNumbers={setShowNumbers} showNumbers={showNumbers}
-        />
+          <Toggle
+            setShowArrows={setShowArrows}
+            showArrows={showArrows}
+            setShowPlayers={setShowPlayers}
+            showPlayers={showPlayers}
+            setShowThrows={setShowThrows}
+            showThrows={showThrows}
+            setShowCatches={setShowCatches}
+            showCatches={showCatches}
+            setShowNumbers={setShowNumbers}
+            showNumbers={showNumbers}
+          />
+        </div>
+        <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
       </div>
-      <Buttons handleClearAll={handleClearAll} 
-               handleSave={handleSave} 
-               handleRemoveLast={handleRemoveLast} />
-               </div>
     </>
   );
 };
