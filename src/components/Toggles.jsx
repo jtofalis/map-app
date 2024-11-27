@@ -1,6 +1,7 @@
-import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { useEffect, useState } from 'react';
+import titleize from 'titleizejs';
 
 export default function ToggleButtonGroupComponent({
   setShowArrows, showArrows,
@@ -9,8 +10,8 @@ export default function ToggleButtonGroupComponent({
   setShowCatches, showCatches,
   setShowNumbers, showNumbers,
 }) {
-  // Create state variables for each toggle
-  const [alignment, setAlignment] = React.useState({
+  // Single object to track all toggle states
+  const [toggleStates, setToggleStates] = useState({
     players: showPlayers,
     throws: showThrows,
     arrows: showArrows,
@@ -18,81 +19,82 @@ export default function ToggleButtonGroupComponent({
     numbers: showNumbers
   });
 
-  const handleChange = (event, newAlignment) => {
-    // Update the state based on the clicked button
-    setAlignment((prev) => {
-      const newState = { ...prev, [newAlignment]: !prev[newAlignment] };
-      switch (newAlignment) {
-        case 'players':
-          setShowPlayers(!prev.players);
-          break;
-        case 'throws':
-          setShowThrows(!prev.throws);
-          break;
-        case 'arrows':
-          setShowArrows(!prev.arrows);
-          break;
-        case 'catches':
-          setShowCatches(!prev.catches);
-          break;
-        case 'numbers':
-          setShowNumbers(!prev.numbers);
-          break;
-        default:
-          break;
+  // Object that maps toggle names to their setter functions
+  const setterFunctions = {
+    players: setShowPlayers,
+    throws: setShowThrows,
+    arrows: setShowArrows,
+    catches: setShowCatches,
+    numbers: setShowNumbers
+  };
+
+  const handleChange = (event) => {
+    const toggleName = event.target.value;
+
+    setToggleStates(prev => {
+      // Create new state object
+      const newStates = { ...prev };
+
+      // Handle the special case: turning on numbers requires arrows
+      if (toggleName === 'numbers' && !prev.numbers && !prev.arrows) {
+        newStates.numbers = true;
+        newStates.arrows = true;
+        setShowArrows(true);
+        setShowNumbers(true);
+        return newStates;
       }
-      return newState;
+
+      // Normal toggle behavior
+      newStates[toggleName] = !prev[toggleName];
+      setterFunctions[toggleName](!prev[toggleName]);
+
+      // If turning off arrows, also turn off numbers
+      if (toggleName === 'arrows' && !newStates.arrows && prev.numbers) {
+        newStates.numbers = false;
+        setShowNumbers(false);
+      }
+
+      return newStates;
     });
   };
 
+  // Keep numbers in sync with arrows
+  useEffect(() => {
+    if (!showArrows && toggleStates.numbers) {
+      setToggleStates(prev => ({ ...prev, numbers: false }));
+      setShowNumbers(false);
+    }
+  }, [showArrows, setToggleStates, setShowNumbers, toggleStates]);
+
+  // Render the toggle buttons
   return (
     <div className="flex justify-center">
-      <ToggleButtonGroup className=''
+      <ToggleButtonGroup
         color="primary"
         exclusive
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',  // Allow buttons to wrap to the next line
-          gap: 1,  // Add space between buttons
-          maxWidth: '100%',  // Ensure it does not overflow the container
-          justifyContent: 'center',  // Center the buttons horizontally
+          flexWrap: 'wrap',
+          maxWidth: '100%',
+          justifyContent: 'center',
         }}
       >
-        <ToggleButton
-          value="players"
-          selected={alignment.players}
-          onChange={handleChange}
-        >
-          Players
-        </ToggleButton>
-        <ToggleButton
-          value="arrows"
-          selected={alignment.arrows}
-          onChange={handleChange}
-        >
-          Arrows
-        </ToggleButton>
-        <ToggleButton
-          value="throws"
-          selected={alignment.throws}
-          onChange={handleChange}
-        >
-          Throws
-        </ToggleButton>
-        <ToggleButton
-          value="catches"
-          selected={alignment.catches}
-          onChange={handleChange}
-        >
-          Catches
-        </ToggleButton>
-        <ToggleButton
-          value="numbers"
-          selected={alignment.numbers}
-          onChange={handleChange}
-        >
-          Numbers
-        </ToggleButton>
+        {[
+          'players',
+          'arrows',
+          'throws',
+          'catches',
+          'numbers',
+        ].map((value) => (
+          <ToggleButton
+            key={value}
+            value={value}
+            selected={toggleStates[value]}
+            onChange={handleChange}
+          >
+            {titleize(value)}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
     </div>
   );
