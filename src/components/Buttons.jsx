@@ -24,7 +24,7 @@ const Buttons = ({ handleSave, handleRemoveLast, handleClearAll }) => {
   ];
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 grid grid-cols-3 gap-4 justify-between p-3 bg-white shadow-lg'>
+    <div className='fixed bottom-0 mx-auto w-full max-w-screen-lg grid grid-cols-3 gap-4 justify-between p-3 bg-white shadow-lg'>
       {buttons.map((button) => (
         <ActionButton key={button.label} onClick={button.onClick} label={button.label} Icon={button.Icon} />
       ))}

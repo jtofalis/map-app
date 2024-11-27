@@ -43,7 +43,7 @@ const UltimateFrisbeePitch = () => {
 
   return (
     <>
-      <div className='w-full h-[120vh] font-helvetic pb-[9vh]'>
+      <div className='w-full max-w-screen-lg mx-auto h-[120vh] font-helvetic pb-[9vh]'>
         <MainTitle />
         <FrisbeePitch>
           {savedPositions.map((savedPos, index) => (

@@ -57,13 +57,14 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
         }}
       >
         <div className='p-2'>
+          <h2 className='text-lg text-center'>Throw {index + 1}</h2>
           <button
             type='button'
             aria-label='Delete Saved Throw'
             title='Delete Saved Throw'
             className='p-2 hover:text-red-500 rounded hover:bg-gray-100'
             onClick={() => {
-              if (!window.confirm('Are you sure you want to delete this saved throw?')) return;
+              if (!window.confirm(`Are you sure you want to delete this saved throw ${index + 1}?`)) return;
               setSavedPositions((prev) => prev.filter((_, i) => i !== index));
               setIsOpen(false);
             }}
