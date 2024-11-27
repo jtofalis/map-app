@@ -73,6 +73,7 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
           <button
             type='button'
             aria-label='Switch Thrower and Catcher Positions'
+            title='Switch Thrower and Catcher Positions'
             className='p-2 hover:text-red-500 rounded hover:bg-gray-100'
             onClick={() => {
               setSavedPositions((prev) => prev.map((pos, i) => (i === index ? switchThrowerAndCatcher(pos) : pos)));
