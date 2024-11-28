@@ -27,7 +27,7 @@ export default function ToggleButtonGroupComponent({
       ...prev,
       arrows: showArrows,
     }));
-  }, [showArrows, setToggleStates]);
+  }, [showArrows]);
 
   const setterFunctions = {
     players: setShowPlayers,

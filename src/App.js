@@ -33,10 +33,6 @@ const UltimateFrisbeePitch = () => {
     setSavedPositions((prevSaved) => [...prevSaved, { ...positions }]);
   };
 
-  const handleRemoveLast = () => {
-    setSavedPositions((prevPositions) => prevPositions.slice(0, -1));
-  };
-
   const handleClearAll = () => {
     setSavedPositions([]);
   };
