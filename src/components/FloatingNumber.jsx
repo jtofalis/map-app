@@ -28,14 +28,18 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
         className='cursor-pointer absolute z-10'
         style={{ left: `${midX}px`, top: `${midY}px` }}
       >
-        <svg width='20' height='20' x={midX - 10} y={midY - 10}>
-          <g>
-            <circle cx='10' cy='10' r='10' className='fill-gray-200' />
-            <text x='10' y='10' className='fill-black' textAnchor='middle' dominantBaseline='middle'>
-              {index + 1}
-            </text>
-          </g>
-        </svg>
+      <svg width='20' height='20' x={midX - 10} y={midY - 10} className='relative'>
+        <circle cx='10' cy='10' r='10' className='fill-gray-200' />
+        <text
+            x='10'
+            y='10'
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className='fill-black text-xs origin-center md:-rotate-90'
+        >
+            {index + 1}
+        </text>
+      </svg>
       </div>
 
       <Popover

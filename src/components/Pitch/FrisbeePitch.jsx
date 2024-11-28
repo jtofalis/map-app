@@ -4,7 +4,7 @@ import EndZone from './EndZone';
 const FrisbeePitch = ({ children, gridlines }) => {
 
   return (
-    <div className='px-2'>
+    <div className='px-2  md:rotate-90'>
       <div className='max-w-xs drop-shadow-xl h-[60vh] bg-[#6BA368] relative mx-auto border-4 border-slate-300'>
         {/* End Zones */}
         <EndZone position='top-0' text='Attacking End Zone' />
