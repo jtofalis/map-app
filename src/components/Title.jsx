@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const MainTitle = () => {
   const [fontSize, setFontSize] = useState(100);
@@ -19,11 +19,9 @@ const MainTitle = () => {
       const input = inputRef.current;
       const container = containerRef.current;
 
-      // Reset to max size first
       let currentSize = 40;
       input.style.fontSize = `${currentSize}px`;
 
-      // Gradually decrease until it fits or hits minimum
       while (input.scrollWidth > container.clientWidth && currentSize > MIN_FONT_SIZE) {
         currentSize--;
         input.style.fontSize = `${currentSize}px`;
@@ -39,23 +37,12 @@ const MainTitle = () => {
     <div ref={containerRef}>
       <input
         ref={inputRef}
-        type="text"
+        type='text'
         value={text}
         placeholder='TEAM 1 VS TEAM 2'
         onChange={(e) => setText(e.target.value)}
         style={{ fontSize: `${fontSize}px` }}
-        className=' w-full 
-                    mt-5 
-                    
-                    h-full 
-                    p-2
-                    text-center
-                    font-bold
-                    text-black 
-                    bg-transparent 
-                    border-none 
-                    outline-none'
-        
+        className='w-full mt-5 h-full p-2 text-center font-bold text-black bg-transparent border-none outline-none'
       />
     </div>
   );

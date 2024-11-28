@@ -93,7 +93,14 @@ const UltimateFrisbeePitch = () => {
             showNumbers={showNumbers}
           />
         </div>
-        <Buttons handleClearAll={handleClearAll} handleSave={handleSave} handleRemoveLast={handleRemoveLast} />
+        <Buttons
+          handleClearAll={handleClearAll}
+          handleSave={handleSave}
+          showNumbers={showNumbers}
+          setShowNumbers={setShowNumbers}
+          showArrows={showArrows}
+          setShowArrows={setShowArrows}
+        />
       </div>
     </>
   );
