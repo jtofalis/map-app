@@ -65,7 +65,17 @@ export default function ToggleButtonGroupComponent({
         }}
       >
         {['players', 'arrows', 'throws', 'catches'].map((value) => (
-          <ToggleButton key={value} value={value} selected={toggleStates[value]} onChange={handleChange}>
+          <ToggleButton
+            key={value}
+            value={value}
+            selected={toggleStates[value]}
+            onChange={handleChange}
+            sx={{
+              borderRadius: '50px', // Makes the buttons more round
+              padding: '8px 16px', // Adjust spacing for better appearance
+              textTransform: 'capitalize', // Keeps the text consistent
+            }}
+          >
             {titleize(value)}
           </ToggleButton>
         ))}
