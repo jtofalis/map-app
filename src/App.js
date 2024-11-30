@@ -8,8 +8,6 @@ import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLine from './components/SavedPositionsLine';
 import MainTitle from './components/Title';
 import Toggle from './components/Toggles';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -23,10 +21,7 @@ const UltimateFrisbeePitch = () => {
   const [showThrows, setShowThrows] = useState(true);
   const [showCatches, setShowCatches] = useState(true);
   const [savedPositions, setSavedPositions] = useState([]);
-  const [expanded, setExpanded] = useState(false);
-  const handleChange = () => {
-    setExpanded(!expanded);
-  };
+
   const handleDrag = (player, e, data) => {
     setPositions((prev) => ({
       ...prev,
@@ -79,41 +74,23 @@ const UltimateFrisbeePitch = () => {
             />
           )}
         </FrisbeePitch>
-        <div className="w-full max-w-md mx-auto p-4">
-        <div className="pb-4">
-            <Toggle
-              setShowArrows={setShowArrows}
-              showArrows={showArrows}
-              setShowPlayers={setShowPlayers}
-              showPlayers={showPlayers}
-              setShowThrows={setShowThrows}
-              showThrows={showThrows}
-              setShowCatches={setShowCatches}
-              showCatches={showCatches}
-              setShowNumbers={setShowNumbers}
-              showNumbers={showNumbers}
-            />
-          </div>
-        <Accordion
-          expanded={expanded}
-          onChange={handleChange}
-          className="shadow-lg rounded-lg border-2 border-gray-300"
-        >
-  <AccordionSummary
-    expandIcon={expanded ? <ExpandLess /> : <ExpandMore />}
-    aria-controls="panel1a-content"
-    id="panel1a-header"
-    className="bg-blue-500 text-white p-0"
-  >
-    <div className="flex items-center justify-between w-full">
-      <span className="text-lg">Analysis</span>
-      <span>{expanded ? 'Hide' : 'Show'}</span>
-    </div>
-  </AccordionSummary>
-  <AccordionDetails className="bg-gray-100 p-0">
-    <BarChart savedPositions={savedPositions} />
-  </AccordionDetails>
-</Accordion>
+        <div className="w-full max-w-md mx-auto px-10 py-4">
+          <BarChart savedPositions={savedPositions} />
+        </div>
+        <div className="w-full max-w-md mx-auto">
+<Toggle
+  setShowArrows={setShowArrows}
+  showArrows={showArrows}
+  setShowPlayers={setShowPlayers}
+  showPlayers={showPlayers}
+  setShowThrows={setShowThrows}
+  showThrows={showThrows}
+  setShowCatches={setShowCatches}
+  showCatches={showCatches}
+  setShowNumbers={setShowNumbers}
+  showNumbers={showNumbers}
+/>
+</div>
   </div>
     <Buttons
       handleClearAll={handleClearAll}
@@ -123,7 +100,6 @@ const UltimateFrisbeePitch = () => {
       showArrows={showArrows}
       setShowArrows={setShowArrows}
     />
-    </div>
       <div className="saved-positions-container mt-4">
       {/* <ul className="list-disc pl-5">
         {savedPositions.map((savedPos, index) => (
