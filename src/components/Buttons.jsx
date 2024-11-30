@@ -41,21 +41,18 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
 
   return (
     <div className="fixed bottom-0 mx-auto w-full max-w-screen-lg">
-      {/* Minimize/Maximize Toggle */}
       <div className="flex justify-center items-center p-1 bg-gray-100 shadow-md">
-
-        
         <button
           onClick={toggleMinimize}
           className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-800"
         >
           {isMinimized ? (
             <>
-              <KeyboardArrowUp /> Maximize
+              <KeyboardArrowUp /> Show
             </>
           ) : (
             <>
-              <KeyboardArrowDown /> Minimize
+              <KeyboardArrowDown /> Hide
             </>
           )}
         </button>
