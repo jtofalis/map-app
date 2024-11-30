@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getDistanceCategory } from '../../utils/getDistanceCategory';
 import { getDirectionCategory } from '../../utils/getDirectionCategory';
 import BarSection from './Section';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
 const BarChartLength = ({ savedPositions }) => {
+  const [isMinimized, setIsMinimized] = useState(false);
+  const toggleMinimize = () => {
+    setIsMinimized((prev) => !prev);
+  };
+  
+
   // Calculate categories for distance
   const categoriesDistance = savedPositions.map(getDistanceCategory);
   const countsDistance = {
@@ -42,7 +50,27 @@ const BarChartLength = ({ savedPositions }) => {
 
   // JSX rendering
   return (
-    <div>
+    <div className=" mx-auto w-full max-w-screen-lg">
+    <div className="flex justify-center items-center p-1 bg-gray-100 shadow-md">
+      <button
+        onClick={toggleMinimize}
+        className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+      >
+        {isMinimized ? (
+          <>
+            <KeyboardArrowUp /> Show
+          </>
+        ) : (
+          <>
+            <KeyboardArrowDown /> Hide
+          </>
+        )}
+      </button>
+    </div>
+
+    {/* Button Bar */}
+    {!isMinimized && (
+  <div>
       {/* Distance Bar Chart */}
       <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden relative'>
         {['short', 'medium', 'long'].map((type) => (
@@ -66,8 +94,10 @@ const BarChartLength = ({ savedPositions }) => {
           </p>
         )}
       </div>
-    </div>
+  </div>
+  )}
+
+</div>
   );
 };
-
 export default BarChartLength;
