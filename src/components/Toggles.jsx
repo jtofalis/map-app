@@ -54,16 +54,7 @@ export default function ToggleButtonGroupComponent({
 
   return (
     <div className='flex justify-center'>
-      <ToggleButtonGroup
-        color='primary'
-        exclusive
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          maxWidth: '100%',
-          justifyContent: 'center',
-        }}
-      >
+      <ToggleButtonGroup color='primary'>
         {['players', 'arrows', 'throws', 'catches'].map((value) => (
           <ToggleButton
             key={value}

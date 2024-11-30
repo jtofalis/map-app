@@ -52,7 +52,8 @@ const UltimateFrisbeePitch = () => {
               {showNumbers && (
                 <FloatingNumber savedPosition={savedPos} index={index} setSavedPositions={setSavedPositions} />
               )}
-              {showArrows && <SavedPositionsLine savedPosition={savedPos} />}
+              {showArrows && 
+                <SavedPositionsLine savedPosition={savedPos}/>}
 
               {showCatches && (
                 <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
@@ -79,63 +80,63 @@ const UltimateFrisbeePitch = () => {
           )}
         </FrisbeePitch>
         <div className="w-full max-w-md mx-auto p-4">
-      <Accordion
-        expanded={expanded}
-        onChange={handleChange}
-        className="shadow-lg rounded-lg border-2 border-gray-300"
-      >
-        <AccordionSummary
-          expandIcon={expanded ? <ExpandLess /> : <ExpandMore />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          className="bg-blue-500 text-white"
-        >
-          <div className="flex items-center justify-between w-full">
-            <span className="text-lg">Analysis</span>
-            <span>{expanded ? 'Collapse' : 'Expand'}</span>
+        <div className="pb-4">
+            <Toggle
+              setShowArrows={setShowArrows}
+              showArrows={showArrows}
+              setShowPlayers={setShowPlayers}
+              showPlayers={showPlayers}
+              setShowThrows={setShowThrows}
+              showThrows={showThrows}
+              setShowCatches={setShowCatches}
+              showCatches={showCatches}
+              setShowNumbers={setShowNumbers}
+              showNumbers={showNumbers}
+            />
           </div>
-        </AccordionSummary>
-        <AccordionDetails className="bg-gray-100">
-        <BarChart savedPositions={savedPositions} />        </AccordionDetails>
-      </Accordion>
+        <Accordion
+          expanded={expanded}
+          onChange={handleChange}
+          className="shadow-lg rounded-lg border-2 border-gray-300"
+        >
+  <AccordionSummary
+    expandIcon={expanded ? <ExpandLess /> : <ExpandMore />}
+    aria-controls="panel1a-content"
+    id="panel1a-header"
+    className="bg-blue-500 text-white p-0"
+  >
+    <div className="flex items-center justify-between w-full">
+      <span className="text-lg">Analysis</span>
+      <span>{expanded ? 'Hide' : 'Show'}</span>
     </div>
-        <div>
-          <Toggle
-            setShowArrows={setShowArrows}
-            showArrows={showArrows}
-            setShowPlayers={setShowPlayers}
-            showPlayers={showPlayers}
-            setShowThrows={setShowThrows}
-            showThrows={showThrows}
-            setShowCatches={setShowCatches}
-            showCatches={showCatches}
-            setShowNumbers={setShowNumbers}
-            showNumbers={showNumbers}
-          />
-        </div>
-        <Buttons
-          handleClearAll={handleClearAll}
-          handleSave={handleSave}
-          showNumbers={showNumbers}
-          setShowNumbers={setShowNumbers}
-          showArrows={showArrows}
-          setShowArrows={setShowArrows}
-        />
-      </div>
+  </AccordionSummary>
+  <AccordionDetails className="bg-gray-100 p-0">
+    <BarChart savedPositions={savedPositions} />
+  </AccordionDetails>
+</Accordion>
+  </div>
+    <Buttons
+      handleClearAll={handleClearAll}
+      handleSave={handleSave}
+      showNumbers={showNumbers}
+      setShowNumbers={setShowNumbers}
+      showArrows={showArrows}
+      setShowArrows={setShowArrows}
+    />
+    </div>
       <div className="saved-positions-container mt-4">
-  {/* <ul className="list-disc pl-5">
-    {savedPositions.map((savedPos, index) => (
-      <li key={index} className="mb-2">
-        <strong>Position {index + 1}:</strong>
-        <div>
-          <p><strong>Thrower:</strong> x: {savedPos.thrower.x}, y: {savedPos.thrower.y}</p>
-          <p><strong>Catcher:</strong> x: {savedPos.catcher.x}, y: {savedPos.catcher.y}</p>
-        </div>
-      </li>
-    ))}
-  </ul> */}
-</div>
-
+      {/* <ul className="list-disc pl-5">
+        {savedPositions.map((savedPos, index) => (
+          <li key={index} className="mb-2">
+            <strong>Position {index + 1}:</strong>
+            <div>
+              <p><strong>Thrower:</strong> x: {savedPos.thrower.x}, y: {savedPos.thrower.y}</p>
+              <p><strong>Catcher:</strong> x: {savedPos.catcher.x}, y: {savedPos.catcher.y}</p>
+            </div>
+          </li>
+        ))}
+      </ul> */}
+    </div>
     </>
   );
 };

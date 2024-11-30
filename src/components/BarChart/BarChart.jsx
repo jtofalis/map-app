@@ -44,7 +44,7 @@ const BarChartLength = ({ savedPositions }) => {
   return (
     <div>
       {/* Distance Bar Chart */}
-      <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden mx-auto my-5 relative'>
+      <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden relative'>
         {['short', 'medium', 'long'].map((type) => (
           <BarSection key={type} type={type} percentage={percentagesDistance[type]} />
         ))}
@@ -56,7 +56,7 @@ const BarChartLength = ({ savedPositions }) => {
       </div>
 
       {/* Direction Bar Chart */}
-      <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden mx-auto my-5 relative'>
+      <div className='drop-shadow-xl flex w-full h-12 bg-gray-100 border border-gray-300 shadow-inner overflow-hidden relative'>
         {['sameThird', 'crossThird', 'crossPitch'].map((type) => (
           <BarSection key={type} type={type} percentage={percentagesDirection[type]} />
         ))}
