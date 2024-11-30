@@ -100,8 +100,6 @@ const UltimateFrisbeePitch = () => {
       </Accordion>
     </div>
         <div>
-
-          
           <Toggle
             setShowArrows={setShowArrows}
             showArrows={showArrows}
