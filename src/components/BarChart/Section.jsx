@@ -10,10 +10,12 @@ const BarSection = ({ percentage, type }) => {
 
   const formatLabel = (label) => {
     // Add a space before uppercase letters and capitalize the first letter
-    return label
-      .replace(/([A-Z])/g, ' $1')
-      .charAt(0)
-      .toUpperCase() + label.slice(1).replace(/([A-Z])/g, ' $1');
+    return (
+      label
+        .replace(/([A-Z])/g, ' $1')
+        .charAt(0)
+        .toUpperCase() + label.slice(1).replace(/([A-Z])/g, ' $1')
+    );
   };
 
   const formattedLabel = formatLabel(type);
@@ -21,9 +23,11 @@ const BarSection = ({ percentage, type }) => {
   return percentage > 0 ? (
     <div className={`h-full relative ${bgColors[type]}`} style={{ width: `${percentage}%` }}>
       {percentage > 14.5 && (
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black">
+        <div className="absolute inset-0 flex items-center justify-center text-center">
+        <span className="text-black">
           {formattedLabel}
         </span>
+        </div>
       )}
     </div>
   ) : null;
