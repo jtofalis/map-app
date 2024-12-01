@@ -6,7 +6,7 @@ import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLine from './components/SavedPositionsLine';
-import MainTitle from './components/Title';
+import MainTitle from './components/MainTitle';
 import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
