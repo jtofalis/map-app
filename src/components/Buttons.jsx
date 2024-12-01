@@ -40,7 +40,7 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
   ];
 
   return (
-    <div className="fixed bottom-0 mx-auto w-full max-w-screen-lg">
+    <div className="fixed bottom-0 mx-auto w-full max-w-screen-">
       <div className="flex justify-center items-center p-1 bg-gray-100 shadow-md">
         <button
           onClick={toggleMinimize}
