@@ -1,65 +1,68 @@
-import React, { useEffect, useRef } from 'react';
-import heatmapjs from 'heatmap.js';
+import h337 from 'heatmap.js';
+import { useEffect, useMemo } from 'react';
 
-const Heatmap = ({ positions, showThrows, showCatches }) => {
-  const heatmapContainerRef = useRef(null);
+const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
+  const throwDataPoints = useMemo(() => {
+    return savedPositions.map((position) => position.thrower);
+  }, [savedPositions])
+
+  const catchDataPoints = useMemo(() => {
+    return savedPositions.map((position) => position.catcher);
+  }, [savedPositions])
+
+  console.log(throwDataPoints, catchDataPoints)
   useEffect(() => {
-    // Initialize the heatmap instance
-    const heatmapInstance = heatmapjs.create({
-      container: heatmapContainerRef.current,
-      radius: 20,
-      maxOpacity: 0.6,
-      minOpacity: 0.1,
-      blur: 0.9,
+    if (!pitchRef.current) return;
+
+    const heatmapInstance = h337.create({
+      container: pitchRef.current,
     });
 
-    // Prepare the data points for the heatmap
+    console.log('heatmapInstance', heatmapInstance)
+    // now generate some random data
     const points = [];
+    let max = 0;
 
-    // Add points for thrower and catcher if enabled
-    if (showThrows) {
-      points.push({
-        x: positions.thrower.x,
-        y: positions.thrower.y,
-        value: 1, // You can adjust the value depending on the weight of the heatmap point
+    if (true) {
+      throwDataPoints.forEach((point) => {
+        const val = 1;
+        max = Math.max(max, val);
+        const pointData = {
+          x: point.x,
+          y: point.y,
+          value: val
+        };
+        points.push(pointData);
+      });
+    }
+    if (true) {
+      catchDataPoints.forEach((point) => {
+        const val = 1;
+        max = Math.max(max, val);
+        const pointData = {
+          x: point.x,
+          y: point.y,
+          value: val
+        };
+        points.push(pointData);
       });
     }
 
-    if (showCatches) {
-      points.push({
-        x: positions.catcher.x,
-        y: positions.catcher.y,
-        value: 1,
-      });
-    }
-
-    // Set the data for the heatmap
-    heatmapInstance.setData({
-      max: 1,
-      min: 0,
-      data: points,
-    });
-
-    // Cleanup the heatmap instance when the component unmounts
-    return () => {
-      heatmapInstance.destroy();
+    // heatmap data format
+    const data = {
+      max: max,
+      data: points
     };
-  }, [positions, showThrows, showCatches]);
 
-  return (
-    <div
-      ref={heatmapContainerRef}
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none', // Allow clicks to pass through the heatmap
-      }}
-    />
-  );
+    // if you have a set of datapoints always use setData instead of addData
+    // for data initialization
+    console.log(pitchRef.current, data)
+    heatmapInstance.setData(data);
+  }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches])
+
+
+  return null
 };
 
 export default Heatmap;

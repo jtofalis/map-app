@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import Heatmap from '../Heatmap';
 import EndZone from './EndZone';
 
-const FrisbeePitch = ({ children, gridlines }) => {
+const FrisbeePitch = ({ children, savedPositions }) => {
+  const pitchRef = useRef()
 
   return (
-    <div className='px-2'>
-      <div className='max-w-xs drop-shadow-xl h-[60vh] bg-[#6BA368] relative mx-auto border-4 border-slate-300'>
+    <div className='mx-auto border-4 border-slate-300 max-w-xs relative' >
+      <div className='max-w-full drop-shadow-xl h-[60vh] bg-[#6BA368] relative'>
+
         {/* End Zones */}
         <EndZone position='top-0' text='Attacking End Zone' />
         <EndZone position='bottom-0' text='Defending End Zone' />
@@ -17,9 +20,12 @@ const FrisbeePitch = ({ children, gridlines }) => {
         {/* Vertical Dashed Lines for Thirds */}
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[33%]' />
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[66%]' />
+        <div className='absolute inset-0' ref={pitchRef}></div>
+        <Heatmap savedPositions={savedPositions} pitchRef={pitchRef}/>
 
         {children}
       </div>
+
     </div>
   );
 };
