@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FloatingNumber from './components/FloatingNumber';
@@ -46,6 +46,23 @@ const UltimateFrisbeePitch = () => {
   const handleClearAll = () => {
     setSavedPositions([]);
   };
+
+  // Confirm before refresh or page navigation
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      // Custom message for the confirmation prompt
+      const message = 'Are you sure you want to leave? Any unsaved data will be lost.';
+      event.returnValue = message; // Standard for most browsers
+      return message; // For some browsers
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
