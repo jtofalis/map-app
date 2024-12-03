@@ -2,11 +2,10 @@ import React, { Fragment, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FloatingNumber from './components/FloatingNumber';
+import MainTitle from './components/MainTitle';
 import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
-import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLine from './components/SavedPositionsLine';
-import MainTitle from './components/MainTitle';
 import Toggle from './components/Toggles';
 
 const UltimateFrisbeePitch = () => {
@@ -41,21 +40,13 @@ const UltimateFrisbeePitch = () => {
     <>
       <div className='w-full max-w-screen-lg mx-auto h-[120vh] font-helvetic pb-[9vh]'>
         <MainTitle />
-        <FrisbeePitch>
+        <FrisbeePitch savedPositions={savedPositions} showCatches={showCatches} showThrows={showThrows}>
           {savedPositions.map((savedPos, index) => (
             <Fragment key={(savedPositions, index)}>
               {showNumbers && (
                 <FloatingNumber savedPosition={savedPos} index={index} setSavedPositions={setSavedPositions} />
               )}
-              {showArrows && 
-                <SavedPositionsLine savedPosition={savedPos}/>}
-
-              {showCatches && (
-                <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
-              )}
-              {showThrows && (
-                <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
-              )}
+              {showArrows && <SavedPositionsLine savedPosition={savedPos} />}
             </Fragment>
           ))}
 
@@ -74,34 +65,34 @@ const UltimateFrisbeePitch = () => {
             />
           )}
         </FrisbeePitch>
-        <div className="w-full max-w-md mx-auto px-10 py-4">
+        <div className='w-full max-w-md mx-auto px-10 py-4'>
           <BarChart savedPositions={savedPositions} />
         </div>
-        <div className="w-full max-w-md mx-auto">
-<Toggle
-  setShowArrows={setShowArrows}
-  showArrows={showArrows}
-  setShowPlayers={setShowPlayers}
-  showPlayers={showPlayers}
-  setShowThrows={setShowThrows}
-  showThrows={showThrows}
-  setShowCatches={setShowCatches}
-  showCatches={showCatches}
-  setShowNumbers={setShowNumbers}
-  showNumbers={showNumbers}
-/>
-</div>
-  </div>
-    <Buttons
-      handleClearAll={handleClearAll}
-      handleSave={handleSave}
-      showNumbers={showNumbers}
-      setShowNumbers={setShowNumbers}
-      showArrows={showArrows}
-      setShowArrows={setShowArrows}
-    />
-      <div className="saved-positions-container mt-4">
-      {/* <ul className="list-disc pl-5">
+        <div className='w-full max-w-md mx-auto'>
+          <Toggle
+            setShowArrows={setShowArrows}
+            showArrows={showArrows}
+            setShowPlayers={setShowPlayers}
+            showPlayers={showPlayers}
+            setShowThrows={setShowThrows}
+            showThrows={showThrows}
+            setShowCatches={setShowCatches}
+            showCatches={showCatches}
+            setShowNumbers={setShowNumbers}
+            showNumbers={showNumbers}
+          />
+        </div>
+      </div>
+      <Buttons
+        handleClearAll={handleClearAll}
+        handleSave={handleSave}
+        showNumbers={showNumbers}
+        setShowNumbers={setShowNumbers}
+        showArrows={showArrows}
+        setShowArrows={setShowArrows}
+      />
+      <div className='saved-positions-container mt-4'>
+        {/* <ul className="list-disc pl-5">
         {savedPositions.map((savedPos, index) => (
           <li key={index} className="mb-2">
             <strong>Position {index + 1}:</strong>
@@ -112,7 +103,7 @@ const UltimateFrisbeePitch = () => {
           </li>
         ))}
       </ul> */}
-    </div>
+      </div>
     </>
   );
 };
