@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import Heatmap from '../Heatmap';
 import EndZone from './EndZone';
 
-const FrisbeePitch = ({ children, savedPositions }) => {
+const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => {
   const pitchRef = useRef()
 
   return (
@@ -20,8 +20,9 @@ const FrisbeePitch = ({ children, savedPositions }) => {
         {/* Vertical Dashed Lines for Thirds */}
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[33%]' />
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[66%]' />
-        <div className='absolute inset-0' ref={pitchRef}></div>
-        <Heatmap savedPositions={savedPositions} pitchRef={pitchRef}/>
+
+        <div className='absolute inset-0' ref={pitchRef} />
+        <Heatmap savedPositions={savedPositions} pitchRef={pitchRef} showThrows={showThrows} showCatches={showCatches} />
 
         {children}
       </div>

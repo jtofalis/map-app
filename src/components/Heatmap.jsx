@@ -1,7 +1,22 @@
 import h337 from 'heatmap.js';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
+  const [heatmap, setHeatmap] = useState(() => {
+    if (!pitchRef.current) return;
+
+    return h337.create({
+      container: pitchRef.current,
+    });
+  });
+
+  useEffect(() => {
+    if (!pitchRef.current) return;
+
+    setHeatmap(h337.create({
+      container: pitchRef.current,
+    }));
+  }, [pitchRef])
 
   const throwDataPoints = useMemo(() => {
     return savedPositions.map((position) => position.thrower);
@@ -11,20 +26,13 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
     return savedPositions.map((position) => position.catcher);
   }, [savedPositions])
 
-  console.log(throwDataPoints, catchDataPoints)
   useEffect(() => {
-    if (!pitchRef.current) return;
+    if (!pitchRef.current || !heatmap) return;
 
-    const heatmapInstance = h337.create({
-      container: pitchRef.current,
-    });
-
-    console.log('heatmapInstance', heatmapInstance)
-    // now generate some random data
     const points = [];
     let max = 0;
 
-    if (true) {
+    if (showThrows) {
       throwDataPoints.forEach((point) => {
         const val = 1;
         max = Math.max(max, val);
@@ -36,7 +44,7 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
         points.push(pointData);
       });
     }
-    if (true) {
+    if (showCatches) {
       catchDataPoints.forEach((point) => {
         const val = 1;
         max = Math.max(max, val);
@@ -49,18 +57,14 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
       });
     }
 
-    // heatmap data format
     const data = {
       max: max,
       data: points
     };
 
-    // if you have a set of datapoints always use setData instead of addData
-    // for data initialization
-    console.log(pitchRef.current, data)
-    heatmapInstance.setData(data);
-  }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches])
-
+    heatmap.setData(data);
+    heatmap.repaint();
+  }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches, heatmap])
 
   return null
 };

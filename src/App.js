@@ -5,7 +5,6 @@ import FloatingNumber from './components/FloatingNumber';
 import MainTitle from './components/MainTitle';
 import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
-import PositionHeatmapPoint from './components/PositionHeatmapPoint';
 import SavedPositionsLine from './components/SavedPositionsLine';
 import Toggle from './components/Toggles';
 
@@ -41,20 +40,13 @@ const UltimateFrisbeePitch = () => {
     <>
       <div className='w-full max-w-screen-lg mx-auto h-[120vh] font-helvetic pb-[9vh]'>
         <MainTitle />
-        <FrisbeePitch savedPositions={savedPositions}>
+        <FrisbeePitch savedPositions={savedPositions} showCatches={showCatches} showThrows={showThrows}>
           {savedPositions.map((savedPos, index) => (
             <Fragment key={(savedPositions, index)}>
               {showNumbers && (
                 <FloatingNumber savedPosition={savedPos} index={index} setSavedPositions={setSavedPositions} />
               )}
               {showArrows && <SavedPositionsLine savedPosition={savedPos} />}
-
-              {showCatches && (
-                <PositionHeatmapPoint x={savedPos.catcher.x} y={savedPos.catcher.y} throwerOrCatcher='catcher' />
-              )}
-              {showThrows && (
-                <PositionHeatmapPoint x={savedPos.thrower.x} y={savedPos.thrower.y} throwerOrCatcher='thrower' />
-              )}
             </Fragment>
           ))}
 
