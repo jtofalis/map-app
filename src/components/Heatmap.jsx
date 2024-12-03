@@ -15,9 +15,15 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
     setHeatmap(h337.create({
       container: pitchRef.current,
-    }));
+      gradient: {
+    '.5': 'white',
+    '.95': 'blue'
+  },
+      maxOpacity: 0.7, // Set maximum opacity
+      }));
   }, [pitchRef])
 
+  
   const throwDataPoints = useMemo(() => {
     return savedPositions.map((position) => position.thrower);
   }, [savedPositions])

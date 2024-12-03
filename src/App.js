@@ -28,10 +28,23 @@ const UltimateFrisbeePitch = () => {
     }));
   };
 
-  const handleSave = () => {
-    setSavedPositions((prevSaved) => [...prevSaved, { ...positions }]);
-  };
+  const getRandomOffset = () => Math.floor(Math.random() * 11); // Random number between 10 and 20
 
+  const handleSave = () => {
+    setSavedPositions((prevSaved) => [
+      ...prevSaved,
+      Object.fromEntries(
+        Object.entries(positions).map(([player, { x, y }]) => [
+          player,
+          {
+            x: x + getRandomOffset(),
+            y: y + getRandomOffset(),
+          },
+        ])
+      ),
+    ]);
+  };
+  
   const handleClearAll = () => {
     setSavedPositions([]);
   };

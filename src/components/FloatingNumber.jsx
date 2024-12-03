@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import SwitchIcon from '@mui/icons-material/SwapHoriz';
-import { Popover } from '@mui/material';
+import { Popover, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import React, { useMemo, useRef, useState } from 'react';
 
 const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
@@ -8,7 +8,8 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
   const midY = useMemo(() => (savedPosition.thrower.y + savedPosition.catcher.y) / 2, [savedPosition]);
 
   const anchorRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const switchThrowerAndCatcher = (savedPosition) => {
     const thrower = savedPosition.thrower;
@@ -20,18 +21,24 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
     };
   };
 
+  const handleDelete = () => {
+    setSavedPositions((prev) => prev.filter((_, i) => i !== index));
+    setPopoverOpen(false);
+    setDialogOpen(false);
+  };
+
   return (
     <>
       <div
         ref={anchorRef}
-        onClick={() => setIsOpen(true)}
-        className='cursor-pointer absolute z-10'
+        onClick={() => setPopoverOpen(true)}
+        className="cursor-pointer absolute z-10"
         style={{ left: `${midX}px`, top: `${midY}px` }}
       >
-        <svg width='20' height='20' x={midX - 10} y={midY - 10}>
+        <svg width="20" height="20" x={midX - 10} y={midY - 10}>
           <g>
-            <circle cx='10' cy='10' r='10' className='fill-gray-200' />
-            <text x='10' y='10' className='fill-black' textAnchor='middle' dominantBaseline='middle'>
+            <circle cx="10" cy="10" r="10" className="fill-gray-200" />
+            <text x="10" y="10" className="fill-black" textAnchor="middle" dominantBaseline="middle">
               {index + 1}
             </text>
           </g>
@@ -39,9 +46,9 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
       </div>
 
       <Popover
-        open={isOpen}
+        open={isPopoverOpen}
         anchorEl={anchorRef.current}
-        onClose={() => setIsOpen(false)}
+        onClose={() => setPopoverOpen(false)}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'center',
@@ -56,34 +63,50 @@ const FloatingNumber = ({ savedPosition, index, setSavedPositions }) => {
           },
         }}
       >
-        <div className='p-2'>
-          <h2 className='text-lg text-center'>Throw {index + 1}</h2>
+        <div className="p-4">
+          <h2 className="text-lg text-center">Throw {index + 1}</h2>
           <button
-            type='button'
-            aria-label='Delete Saved Throw'
-            title='Delete Saved Throw'
-            className='p-2 hover:text-red-500 rounded hover:bg-gray-100'
-            onClick={() => {
-              if (!window.confirm(`Are you sure you want to delete this saved throw ${index + 1}?`)) return;
-              setSavedPositions((prev) => prev.filter((_, i) => i !== index));
-              setIsOpen(false);
-            }}
+            type="button"
+            aria-label="Delete Saved Throw"
+            title="Delete Saved Throw"
+            className="p-2 hover:text-red-500 rounded hover:bg-gray-100"
+            onClick={() => setDialogOpen(true)}
           >
-            <DeleteIcon className='fill-current' />
+            <DeleteIcon className="fill-current" />
           </button>
           <button
-            type='button'
-            aria-label='Switch Thrower and Catcher Positions'
-            title='Switch Thrower and Catcher Positions'
-            className='p-2 hover:text-red-500 rounded hover:bg-gray-100'
+            type="button"
+            aria-label="Switch Thrower and Catcher Positions"
+            title="Switch Thrower and Catcher Positions"
+            className="p-2 hover:text-blue-500 rounded hover:bg-gray-100"
             onClick={() => {
-              setSavedPositions((prev) => prev.map((pos, i) => (i === index ? switchThrowerAndCatcher(pos) : pos)));
+              setSavedPositions((prev) =>
+                prev.map((pos, i) => (i === index ? switchThrowerAndCatcher(pos) : pos))
+              );
             }}
           >
-            <SwitchIcon className='fill-current' />
+            <SwitchIcon className="fill-current" />
           </button>
         </div>
       </Popover>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={isDialogOpen} onClose={() => setDialogOpen(false)}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this saved throw {index + 1}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="error">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

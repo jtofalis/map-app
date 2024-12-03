@@ -5,18 +5,40 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import ActionButton from './ActionButton';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from '@mui/material';
 
 const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, showArrows, setShowArrows }) => {
   const [isMinimized, setIsMinimized] = useState(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
   const toggleMinimize = () => {
     setIsMinimized((prev) => !prev);
   };
 
+  const handleConfirmOpen = () => {
+    setOpenConfirmDialog(true);
+  };
+
+  const handleConfirmClose = () => {
+    setOpenConfirmDialog(false);
+  };
+
+  const handleConfirmClear = () => {
+    handleClearAll();
+    setOpenConfirmDialog(false);
+  };
+
   const buttons = [
     {
       label: 'Clear',
-      onClick: handleClearAll,
+      onClick: handleConfirmOpen,
       Icon: DeleteIcon,
     },
     {
@@ -73,6 +95,29 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
           ))}
         </div>
       )}
+
+      {/* Confirmation Dialog */}
+      <Dialog
+        open={openConfirmDialog}
+        onClose={handleConfirmClose}
+        aria-labelledby="confirm-dialog-title"
+        aria-describedby="confirm-dialog-description"
+      >
+        <DialogTitle id="confirm-dialog-title">Are you sure?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="confirm-dialog-description">
+            This action will clear all data. Do you want to proceed?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleConfirmClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmClear} color="secondary">
+            Clear
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
