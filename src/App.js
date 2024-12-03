@@ -28,8 +28,6 @@ const UltimateFrisbeePitch = () => {
     }));
   };
 
-  const getRandomOffset = () => Math.floor(Math.random() * 11); // Random number between 10 and 20
-
   const handleSave = () => {
     setSavedPositions((prevSaved) => [
       ...prevSaved,
@@ -37,8 +35,8 @@ const UltimateFrisbeePitch = () => {
         Object.entries(positions).map(([player, { x, y }]) => [
           player,
           {
-            x: x + getRandomOffset(),
-            y: y + getRandomOffset(),
+            x: x + Math.floor(Math.random() * 11) + 13,
+            y: y + Math.floor(Math.random() * 11) + 13,
           },
         ])
       ),

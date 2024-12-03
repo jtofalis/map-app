@@ -21,6 +21,13 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[33%]' />
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[66%]' />
 
+        {/* Favicon Image in the Center */}
+        <img 
+          src='/favicon.ico' 
+          alt='Favicon Icon' 
+          className='absolute inset-0 mx-auto my-auto w-48 h-48 opacity-40' 
+        />
+
         <div className='absolute inset-0' ref={pitchRef} />
         <Heatmap savedPositions={savedPositions} pitchRef={pitchRef} showThrows={showThrows} showCatches={showCatches} />
 
