@@ -2,71 +2,123 @@ import h337 from 'heatmap.js';
 import { useEffect, useMemo, useState } from 'react';
 
 const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
-  const [heatmap, setHeatmap] = useState(() => {
-    if (!pitchRef.current) return;
-
-    return h337.create({
-      container: pitchRef.current,
-    });
-  });
+  const [throwHeatmap, setThrowHeatmap] = useState(null);
+  const [catchHeatmap, setCatchHeatmap] = useState(null);
 
   useEffect(() => {
     if (!pitchRef.current) return;
+    const container = pitchRef.current;
+    // Common config for both heatmaps
+    const commonConfig = {
+      container,
+      radius: 32,
+      maxOpacity: 0.8,
+      minOpacity: 0,
+      blur: 0.85,
+    };
 
-    setHeatmap(h337.create({
-      container: pitchRef.current,
-    }));
-  }, [pitchRef])
+    // Create throw heatmap with container div
+    const throwContainer = document.createElement('div');
+    throwContainer.id = 'throw-heatmap';
+    throwContainer.style.cssText = 'top: 0; left: 0; width: 100%; height: 100%;';
+    pitchRef.current.appendChild(throwContainer);
+
+    const throwConfig = {
+      ...commonConfig,
+      container: throwContainer,
+      gradient: {
+        '0': '#FFFFFF',
+        '.3': '#94C6FF',
+        '.5': '#3F90FF',
+        '.7': '#0B5DBF',
+        '.9': '#05367A'
+      }
+    };
+
+    // Create catch heatmap with container div
+    const catchContainer = document.createElement('div');
+    catchContainer.id = 'catch-heatmap';
+    catchContainer.style.cssText = 'top: 0; left: 0; width: 100%; height: 100%;';
+    pitchRef.current.appendChild(catchContainer);
+
+    const catchConfig = {
+      ...commonConfig,
+      container: catchContainer,
+      gradient: {
+        '0': '#FFFFFF',
+        '.3': '#FFB3B3',
+        '.5': '#FF6666',
+        '.7': '#CC0000',
+        '.9': '#800000'
+      }
+    };
+
+    setThrowHeatmap(h337.create(throwConfig));
+    setCatchHeatmap(h337.create(catchConfig));
+
+    ensureContainerPosition();
+    return () => {
+      // Clean up
+      if (container) {
+        throwContainer.remove();
+        catchContainer.remove();
+      }
+    };
+  }, [pitchRef]);
+
+  const ensureContainerPosition = () => {
+    document.getElementById('throw-heatmap').style.position = 'absolute';
+    document.getElementById('catch-heatmap').style.position = 'absolute';
+  }
 
   const throwDataPoints = useMemo(() => {
     return savedPositions.map((position) => position.thrower);
-  }, [savedPositions])
+  }, [savedPositions]);
 
   const catchDataPoints = useMemo(() => {
     return savedPositions.map((position) => position.catcher);
-  }, [savedPositions])
+  }, [savedPositions]);
 
   useEffect(() => {
-    if (!pitchRef.current || !heatmap) return;
+    if (!pitchRef.current || !throwHeatmap || !catchHeatmap) return;
 
-    const points = [];
-    let max = 0;
+    // Clear both heatmaps
+    throwHeatmap.setData({ data: [], max: 0 });
+    catchHeatmap.setData({ data: [], max: 0 });
 
+    // Update throw heatmap
     if (showThrows) {
-      throwDataPoints.forEach((point) => {
-        const val = 1;
-        max = Math.max(max, val);
-        const pointData = {
-          x: point.x,
-          y: point.y,
-          value: val
-        };
-        points.push(pointData);
+      const throwPoints = throwDataPoints.map(point => ({
+        x: point.x,
+        y: point.y,
+        value: 1
+      }));
+
+      throwHeatmap.setData({
+        max: 1,
+        data: throwPoints
       });
+      throwHeatmap.repaint();
     }
+
+    // Update catch heatmap
     if (showCatches) {
-      catchDataPoints.forEach((point) => {
-        const val = 1;
-        max = Math.max(max, val);
-        const pointData = {
-          x: point.x,
-          y: point.y,
-          value: val
-        };
-        points.push(pointData);
+      const catchPoints = catchDataPoints.map(point => ({
+        x: point.x,
+        y: point.y,
+        value: 1
+      }));
+
+      catchHeatmap.setData({
+        max: 1,
+        data: catchPoints
       });
+      catchHeatmap.repaint();
     }
+    ensureContainerPosition()
+  }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches, throwHeatmap, catchHeatmap]);
 
-    const data = {
-      max: max,
-      data: points
-    };
-
-    heatmap.setData(data);
-    heatmap.repaint();
-  }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches, heatmap])
-
-  return null
+  return null;
 };
 
 export default Heatmap;

@@ -8,6 +8,9 @@ import PlayerDot from './components/PlayerDot';
 import SavedPositionsLine from './components/SavedPositionsLine';
 import Toggle from './components/Toggles';
 
+export const ADJUSTMENT_FACTOR_X_FOR_ICON = 24;
+export const ADJUSTMENT_FACTOR_Y_FOR_ICON = 30;
+
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
     thrower: { x: 95, y: 300 },
@@ -29,7 +32,17 @@ const UltimateFrisbeePitch = () => {
   };
 
   const handleSave = () => {
-    setSavedPositions((prevSaved) => [...prevSaved, { ...positions }]);
+    const adjustedPositionsForIconSize = {
+      thrower: {
+        x: positions.thrower.x + ADJUSTMENT_FACTOR_X_FOR_ICON,
+        y: positions.thrower.y + ADJUSTMENT_FACTOR_Y_FOR_ICON,
+      },
+      catcher: {
+        x: positions.catcher.x + ADJUSTMENT_FACTOR_X_FOR_ICON,
+        y: positions.catcher.y + ADJUSTMENT_FACTOR_Y_FOR_ICON,
+      },
+    };
+    setSavedPositions((prevSaved) => [...prevSaved, { ...adjustedPositionsForIconSize }]);
   };
 
   const handleClearAll = () => {
