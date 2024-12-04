@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FloatingNumber from './components/FloatingNumber';
