@@ -139,19 +139,6 @@ const UltimateFrisbeePitch = () => {
         showArrows={showArrows}
         setShowArrows={setShowArrows}
       />
-      <div className='saved-positions-container mt-4'>
-        {/* <ul className="list-disc pl-5">
-        {savedPositions.map((savedPos, index) => (
-          <li key={index} className="mb-2">
-            <strong>Position {index + 1}:</strong>
-            <div>
-              <p><strong>Thrower:</strong> x: {savedPos.thrower.x}, y: {savedPos.thrower.y}</p>
-              <p><strong>Catcher:</strong> x: {savedPos.catcher.x}, y: {savedPos.catcher.y}</p>
-            </div>
-          </li>
-        ))}
-      </ul> */}
-      </div>
     </>
   );
 };

@@ -6,6 +6,7 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
   const pitchRef = useRef()
 
   return (
+    <>
     <div className='mx-auto border-4 border-slate-300 max-w-xs relative' >
       <div className='max-w-full drop-shadow-xl h-[60vh] bg-[#6BA368] relative'>
 
@@ -22,10 +23,10 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
         <div className='h-full w-0.5 bg-transparent border-l-2 border-dashed border-slate-300 opacity-50 absolute top-0 left-[66%]' />
 
         {/* Favicon Image in the Center */}
-        <img 
-          src='/favicon.ico' 
-          alt='Favicon Icon' 
-          className='absolute inset-0 mx-auto my-auto w-48 h-48 opacity-40' 
+        <img
+          src='/favicon.ico'
+          alt='Favicon Icon'
+          className='absolute inset-0 mx-auto my-auto w-48 h-48 opacity-40'
         />
 
         <div className='absolute inset-0' ref={pitchRef} />
@@ -33,8 +34,12 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
 
         {children}
       </div>
-
+    <div className='font-mono text-[0.65rem] w-max absolute left-[42%] top-1/2 -rotate-90 text-gray-700'>
+        © {new Date().getFullYear()} Johnny Tofalis in collaboration with{' '}
+        <a href='https://goudeketting.nl/' rel='noopener noreferrer' target="_blank" className='underline'>Robin Goudeketting</a>
+      </div>
     </div>
+    </>
   );
 };
 
