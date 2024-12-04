@@ -58,7 +58,7 @@ const UltimateFrisbeePitch = () => {
     if (newData.length === 0) {
       url.searchParams.delete(URL_PARAM_NAME);
     } else {
-      url.searchParams.set(URL_PARAM_NAME, compress(newData));
+      url.searchParams.set(URL_PARAM_NAME, encodeURIComponent(compress(newData)));
     }
 
     window.history.pushState({}, '', url);

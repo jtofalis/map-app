@@ -1,5 +1,4 @@
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._^`';
-
 const baseCount = CHARS.length;
 
 const toBase = (num) => {
@@ -9,13 +8,19 @@ const toBase = (num) => {
     result = CHARS[num % baseCount] + result;
     num = Math.floor(num / baseCount);
   }
-  return result || CHARS[0];
+  // Pad single characters with leading 'A'
+  return result.length === 1 ? 'A' + result : result;
 };
 
 const fromBase = (str) => {
-  return str.split('').reduce((acc, char) => {
-    return acc * baseCount + CHARS.indexOf(char);
-  }, 0);
+  if (str.length === 1) {
+    return CHARS.indexOf(str);
+  }
+
+  const first = CHARS.indexOf(str[0]);
+  const second = CHARS.indexOf(str[1]);
+
+  return first * baseCount + second;
 };
 
 export const compress = (data) => {
@@ -29,7 +34,7 @@ export const compress = (data) => {
 
 export const decompress = (str) => {
   return str.split('|').map((state) => {
-    const chunks = state.match(/.{1,2}/g);
+    const chunks = state.match(/.{2}/g); // Always expect pairs now
     const [tx, ty, cx, cy] = chunks.map(fromBase);
 
     return {

@@ -9,7 +9,7 @@ export const useSavedPositions = () => {
     const url = new URL(window.location.href);
     const urlPositions = url.searchParams.get(URL_PARAM_NAME);
     if (urlPositions) {
-      const positions = decompress(urlPositions);
+      const positions = decompress(decodeURIComponent(urlPositions));
       setSavedPositions(positions);
     }
   }, []);
