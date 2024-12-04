@@ -71,6 +71,7 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
     document.getElementById('catch-heatmap').style.position = 'absolute';
   }
 
+
   const throwDataPoints = useMemo(() => {
     return savedPositions.map((position) => position.thrower);
   }, [savedPositions]);
