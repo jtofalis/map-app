@@ -1,4 +1,5 @@
 import React from 'react';
+import { ADJUSTMENT_FACTOR_X_FOR_ICON, ADJUSTMENT_FACTOR_Y_FOR_ICON } from '../App';
 
 const SavedPositionsLine = ({ savedPosition }) => {
   return (
@@ -9,10 +10,10 @@ const SavedPositionsLine = ({ savedPosition }) => {
         </marker>
       </defs>
       <line
-        x1={savedPosition.thrower.x}
-        y1={savedPosition.thrower.y}
-        x2={savedPosition.catcher.x}
-        y2={savedPosition.catcher.y}
+        x1={savedPosition.thrower.x - ADJUSTMENT_FACTOR_X_FOR_ICON}
+        y1={savedPosition.thrower.y - ADJUSTMENT_FACTOR_Y_FOR_ICON}
+        x2={savedPosition.catcher.x - ADJUSTMENT_FACTOR_X_FOR_ICON}
+        y2={savedPosition.catcher.y - ADJUSTMENT_FACTOR_Y_FOR_ICON}
         className='stroke-black stroke-[1.5] opacity-20'
         markerEnd='url(#arrowhead)'
       />

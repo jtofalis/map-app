@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FloatingNumber from './components/FloatingNumber';
@@ -7,6 +7,12 @@ import FrisbeePitch from './components/Pitch/FrisbeePitch';
 import PlayerDot from './components/PlayerDot';
 import SavedPositionsLine from './components/SavedPositionsLine';
 import Toggle from './components/Toggles';
+import { useSavedPositions } from './hooks/useSavedPositions';
+import { compress } from './utils/dataCompression';
+
+export const ADJUSTMENT_FACTOR_X_FOR_ICON = 24;
+export const ADJUSTMENT_FACTOR_Y_FOR_ICON = 30;
+export const URL_PARAM_NAME = 'p';
 
 const UltimateFrisbeePitch = () => {
   const [positions, setPositions] = useState({
@@ -19,7 +25,7 @@ const UltimateFrisbeePitch = () => {
   const [showPlayers, setShowPlayers] = useState(true);
   const [showThrows, setShowThrows] = useState(true);
   const [showCatches, setShowCatches] = useState(true);
-  const [savedPositions, setSavedPositions] = useState([]);
+  const [savedPositions, setSavedPositions] = useSavedPositions();
 
   const handleDrag = (player, e, data) => {
     setPositions((prev) => ({
@@ -29,36 +35,50 @@ const UltimateFrisbeePitch = () => {
   };
 
   const handleSave = () => {
-    setSavedPositions((prevSaved) => [
-      ...prevSaved,
-      Object.fromEntries(
-        Object.entries(positions).map(([player, { x, y }]) => [
-          player,
-          {
-            x: x + Math.floor(Math.random() * 11) + 13,
-            y: y + Math.floor(Math.random() * 11) + 13,
-          },
-        ])
-      ),
-    ]);
+    const adjustedPositionsForIconSize = {
+      thrower: {
+        x: positions.thrower.x + ADJUSTMENT_FACTOR_X_FOR_ICON,
+        y: positions.thrower.y + ADJUSTMENT_FACTOR_Y_FOR_ICON,
+      },
+      catcher: {
+        x: positions.catcher.x + ADJUSTMENT_FACTOR_X_FOR_ICON,
+        y: positions.catcher.y + ADJUSTMENT_FACTOR_Y_FOR_ICON,
+      },
+    };
+    setSavedPositions((prevSaved) => {
+      const newPositions = [...prevSaved, { ...adjustedPositionsForIconSize }];
+      updateUrl(newPositions);
+      return newPositions;
+    });
   };
-  
+
+  const updateUrl = (newData) => {
+    const url = new URL(window.location.href);
+
+    if (newData.length === 0) {
+      url.searchParams.delete(URL_PARAM_NAME);
+    } else {
+      url.searchParams.set(URL_PARAM_NAME, encodeURIComponent(compress(newData)));
+    }
+
+    window.history.pushState({}, '', url);
+  };
+
   const handleClearAll = () => {
     setSavedPositions([]);
+    updateUrl([]);
   };
 
   // Confirm before refresh or page navigation
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      // Custom message for the confirmation prompt
       const message = 'Are you sure you want to leave? Any unsaved data will be lost.';
-      event.returnValue = message; // Standard for most browsers
-      return message; // For some browsers
+      event.returnValue = message;
+      return message;
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
@@ -119,19 +139,6 @@ const UltimateFrisbeePitch = () => {
         showArrows={showArrows}
         setShowArrows={setShowArrows}
       />
-      <div className='saved-positions-container mt-4'>
-        {/* <ul className="list-disc pl-5">
-        {savedPositions.map((savedPos, index) => (
-          <li key={index} className="mb-2">
-            <strong>Position {index + 1}:</strong>
-            <div>
-              <p><strong>Thrower:</strong> x: {savedPos.thrower.x}, y: {savedPos.thrower.y}</p>
-              <p><strong>Catcher:</strong> x: {savedPos.catcher.x}, y: {savedPos.catcher.y}</p>
-            </div>
-          </li>
-        ))}
-      </ul> */}
-      </div>
     </>
   );
 };
