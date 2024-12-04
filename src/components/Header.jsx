@@ -11,7 +11,7 @@ const Header = () => {
       <div
         className="flex-grow h-full"
         style={{
-          background: "linear-gradient(to right, #ffffff 60%, #36DCD4)",
+          background: "linear-gradient(to right, #fbfbfb 60%, #36DCD4)",
         }}
       ></div>
     </header>
