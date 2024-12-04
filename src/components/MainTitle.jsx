@@ -42,7 +42,7 @@ const MainTitle = () => {
         placeholder='TEAM 1 VS TEAM 2'
         onChange={(e) => setText(e.target.value)}
         style={{ fontSize: `${fontSize}px` }}
-        className='w-full mt-5 h-full p-2 text-center font-bold text-black bg-transparent border-none outline-none'
+        className='w-full h-full p-2 text-center font-bold text-black bg-transparent border-none outline-none'
       />
     </div>
   );

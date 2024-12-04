@@ -38,7 +38,7 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
 
           {children}
         </div>
-        <div className='font-mono text-[0.65rem] w-max absolute left-[42%] top-1/2 -rotate-90 text-gray-700'>
+        <div className='font-mono text-[0.65rem] w-max absolute left-[42%] top-1/2 -rotate-90 text-gray-500'>
           © {new Date().getFullYear()}{' '}
           <a href='https://tofalis.com/' rel='noopener noreferrer' target='_blank' className='underline'>
             Johnny Tofalis

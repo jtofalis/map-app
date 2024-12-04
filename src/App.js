@@ -9,6 +9,7 @@ import SavedPositionsLine from './components/SavedPositionsLine';
 import Toggle from './components/Toggles';
 import { useSavedPositions } from './hooks/useSavedPositions';
 import { compress } from './utils/dataCompression';
+import Header from './components/Header.jsx';
 
 export const ADJUSTMENT_FACTOR_X_FOR_ICON = 24;
 export const ADJUSTMENT_FACTOR_Y_FOR_ICON = 30;
@@ -19,6 +20,14 @@ const UltimateFrisbeePitch = () => {
     thrower: { x: 95, y: 300 },
     catcher: { x: 95, y: 50 },
   });
+
+  const styles = {
+    main: {
+      padding: "20px",
+      fontFamily: "Arial, sans-serif",
+      textAlign: "center",
+    },
+  };
 
   const [showNumbers, setShowNumbers] = useState(false);
   const [showArrows, setShowArrows] = useState(false);
@@ -64,10 +73,14 @@ const UltimateFrisbeePitch = () => {
     window.history.pushState({}, '', url);
   };
 
+  
+
   const handleClearAll = () => {
     setSavedPositions([]);
     updateUrl([]);
   };
+
+  
 
   // Confirm before refresh or page navigation
   useEffect(() => {
@@ -85,7 +98,13 @@ const UltimateFrisbeePitch = () => {
   }, []);
 
   return (
-    <>
+<>
+    <div>
+      <Header />
+      <main style={styles.main}>
+      </main>
+    </div>
+    
       <div className='w-full max-w-screen-lg mx-auto h-[120vh] font-helvetic pb-[9vh]'>
         <MainTitle />
         <FrisbeePitch savedPositions={savedPositions} showCatches={showCatches} showThrows={showThrows}>
