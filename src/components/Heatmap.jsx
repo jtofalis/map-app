@@ -101,7 +101,7 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
       });
 
       throwHeatmap.setData({
-        max: Math.max(...Object.values(throwCounts)),
+        max: Math.sqrt(Math.max(...Object.values(throwCounts))),
         data: throwPoints
       });
       throwHeatmap.repaint();
@@ -121,7 +121,7 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
       });
 
       catchHeatmap.setData({
-        max: Math.max(...Object.values(catchCounts)),
+        max: Math.sqrt(Math.max(...Object.values(catchCounts))),
         data: catchPoints
       });
       catchHeatmap.repaint();
