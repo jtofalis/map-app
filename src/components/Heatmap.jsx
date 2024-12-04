@@ -89,14 +89,19 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
     // Update throw heatmap
     if (showThrows) {
-      const throwPoints = throwDataPoints.map(point => ({
-        x: point.x,
-        y: point.y,
-        value: 1
-      }));
+      const throwCounts = throwDataPoints.reduce((acc, point) => {
+        const key = `${point.x}-${point.y}`;
+        acc[key] = acc[key] ? acc[key] + 1 : 1;
+        return acc;
+      }, {});
+
+      const throwPoints = Object.entries(throwCounts).map(([key, value]) => {
+        const [x, y] = key.split('-').map(Number);
+        return { x, y, value };
+      });
 
       throwHeatmap.setData({
-        max: 1,
+        max: Math.max(...Object.values(throwCounts)),
         data: throwPoints
       });
       throwHeatmap.repaint();
@@ -104,14 +109,19 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
     // Update catch heatmap
     if (showCatches) {
-      const catchPoints = catchDataPoints.map(point => ({
-        x: point.x,
-        y: point.y,
-        value: 1
-      }));
+      const catchCounts = catchDataPoints.reduce((acc, point) => {
+        const key = `${point.x}-${point.y}`;
+        acc[key] = acc[key] ? acc[key] + 1 : 1;
+        return acc;
+      }, {});
+
+      const catchPoints = Object.entries(catchCounts).map(([key, value]) => {
+        const [x, y] = key.split('-').map(Number);
+        return { x, y, value };
+      });
 
       catchHeatmap.setData({
-        max: 1,
+        max: Math.max(...Object.values(catchCounts)),
         data: catchPoints
       });
       catchHeatmap.repaint();
