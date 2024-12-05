@@ -71,6 +71,6 @@ export default function ToggleButtonGroupComponent({
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
-    </div>
+</div>
   );
 }
