@@ -7,7 +7,7 @@ const FrisbeePitch = ({ children, savedPositions, showThrows, showCatches }) => 
 
   return (
     <>
-      <div className='mx-auto border-4 border-slate-300 max-w-xs relative'>
+      <div className='mx-auto border-4 border-slate-300 max-w-xs relative drop-shadow-xl'>
         <div className='max-w-full drop-shadow-xl h-[60vh] bg-[#6BA368] relative'>
           {/* End Zones */}
           <EndZone position='top-0' text='Attacking End Zone' />

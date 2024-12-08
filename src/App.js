@@ -148,14 +148,13 @@ const UltimateFrisbeePitch = () => {
             setShowNumbers={setShowNumbers}
             showNumbers={showNumbers}
           />
-
-<div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
-          © {new Date().getFullYear()}{' '}
-            Made in collaboration with{' '}
-          <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
-            Robin Goudeketting
-          </a>
-        </div>
+          <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
+            © {new Date().getFullYear()}{' '}
+              Made in collaboration with{' '}
+            <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
+              Robin Goudeketting
+            </a>
+          </div>
         </div>
         
       </div>
