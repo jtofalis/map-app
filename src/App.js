@@ -31,8 +31,13 @@ const UltimateFrisbeePitch = () => {
   const [savedPositions, setSavedPositions] = useSavedPositions();
   const [sessionName, setSessionName] = useState(() => {
     const url = new URL(window.location.href);
-    const sessionName = url.searchParams.get('name');
-    return sessionName ?? '';
+    const name = url.searchParams.get('name');
+
+    if (name) {
+      return decodeURIComponent(name);
+    }
+
+    return '';
   });
   const [showSetNameModal, setShowSetNameModal] = useState(!sessionName);
 
