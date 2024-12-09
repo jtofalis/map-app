@@ -14,7 +14,7 @@ import {
 import React, { useState } from 'react';
 import ActionButton from './ActionButton';
 
-const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, showArrows, setShowArrows }) => {
+const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, showArrows, setShowArrows, addPossible }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
@@ -58,6 +58,7 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
       label: 'Add',
       onClick: handleSave,
       Icon: AddIcon,
+      disabled: !addPossible,
     },
   ];
 
@@ -89,7 +90,6 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
               onClick={button.onClick}
               label={button.label}
               Icon={button.Icon}
-              selected={button.selected}
               disabled={button.disabled}
             />
           ))}

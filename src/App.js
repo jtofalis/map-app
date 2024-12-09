@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import BarChart from './components/BarChart/BarChart';
 import Buttons from './components/Buttons';
 import FloatingNumber from './components/FloatingNumber';
@@ -63,9 +63,7 @@ const UltimateFrisbeePitch = () => {
       },
     };
     setSavedPositions((prevSaved) => {
-      const newPositions = [...prevSaved, { ...adjustedPositionsForIconSize }];
-      updateUrl(newPositions);
-      return newPositions;
+      return [...prevSaved, { ...adjustedPositionsForIconSize }];
     });
   };
 
@@ -81,9 +79,14 @@ const UltimateFrisbeePitch = () => {
     window.history.pushState({}, '', url);
   };
 
+  useEffect(() => {
+    if (!!savedPositions) {
+      updateUrl(savedPositions);
+    }
+  }, [savedPositions]);
+
   const handleClearAll = () => {
     setSavedPositions([]);
-    updateUrl([]);
   };
 
   return (
@@ -117,10 +120,8 @@ const UltimateFrisbeePitch = () => {
             />
           )}
         </FrisbeePitch>
-        <div className='w-full max-w-md mx-auto px-10 py-4'>
-          <BarChart savedPositions={savedPositions} />
-        </div>
-        <div className='w-full max-w-md mx-auto'>
+
+        <div className='w-full max-w-md mx-auto mt-2'>
           <Toggle
             setShowArrows={setShowArrows}
             showArrows={showArrows}
@@ -133,12 +134,15 @@ const UltimateFrisbeePitch = () => {
             setShowNumbers={setShowNumbers}
             showNumbers={showNumbers}
           />
-          <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
-            © {new Date().getFullYear()} Made in collaboration with{' '}
-            <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
-              Robin Goudeketting
-            </a>
+          <div className='w-full max-w-md mx-auto px-10 py-4'>
+            <BarChart savedPositions={savedPositions} />
           </div>
+        </div>
+        <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
+          © {new Date().getFullYear()} Made in collaboration with{' '}
+          <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
+            Robin Goudeketting
+          </a>
         </div>
       </main>
       <Buttons
@@ -148,6 +152,7 @@ const UltimateFrisbeePitch = () => {
         setShowNumbers={setShowNumbers}
         showArrows={showArrows}
         setShowArrows={setShowArrows}
+        addPossible={showPlayers}
       />
       <SessionNamePopup
         sessionName={sessionName}
