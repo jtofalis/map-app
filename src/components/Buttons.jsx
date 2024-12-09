@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import ActionButton from './ActionButton';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Button,
 } from '@mui/material';
+import React, { useState } from 'react';
+import ActionButton from './ActionButton';
 
 const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, showArrows, setShowArrows }) => {
   const [isMinimized, setIsMinimized] = useState(false);
@@ -70,11 +70,11 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
         >
           {isMinimized ? (
             <>
-              <KeyboardArrowUp /> Show
+              <KeyboardArrowUp /> Show buttons
             </>
           ) : (
             <>
-              <KeyboardArrowDown /> Hide
+              <KeyboardArrowDown /> Hide buttons
             </>
           )}
         </button>
