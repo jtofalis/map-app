@@ -14,7 +14,7 @@ const SessionNamePopup = ({ setSessionName, sessionName, open, setOpen }) => {
       <DialogTitle id='confirm-dialog-title'>What are you tracking?</DialogTitle>
       <DialogContent className='w-full sm:min-w-96'>
         <label htmlFor='sessionNameInput' className='block text-sm sm:text-base text-gray-500'>
-          Enter name below:
+          Enter a title below:
         </label>
         <input
           type='text'
