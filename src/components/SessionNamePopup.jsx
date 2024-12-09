@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 
 const SessionNamePopup = ({ setSessionName, sessionName, open, setOpen }) => {
@@ -13,31 +13,25 @@ const SessionNamePopup = ({ setSessionName, sessionName, open, setOpen }) => {
     >
       <DialogTitle id='confirm-dialog-title'>What are you tracking?</DialogTitle>
       <DialogContent className='w-full sm:min-w-96'>
-        <DialogContentText id='confirm-dialog-description'>
-          <p className='text-sm mb-2 sm:text-base text-gray-500'>This is the name of the session. Some examples are:</p>
-          <ul className='list-inside list-disc text-sm/tight sm:text-base text-gray-500'>
-            <li>Johnny vs Jamie</li>
-            <li>Dump-swing practice</li>
-            <li>My best game</li>
-            <li>I &lt;3 Ultimate Insights</li>
-            <li>Wow, what an app</li>
-          </ul>
-          <label htmlFor='sessionNameInput' className='mt-4 block text-sm sm:text-base text-gray-700'>Enter name below:</label>
-          <input
-            type='text'
-            id='sessionNameInput'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className='border-gray-200 border-2 rounded w-full px-2 py-1 text-sm sm:text-base placeholder:text-gray-500 text-gray-700'
-            placeholder='Team 1 vs Team 2'
-          />
-        </DialogContentText>
+        <label htmlFor='sessionNameInput' className='block text-sm sm:text-base text-gray-500'>
+          Enter name below:
+        </label>
+        <input
+          type='text'
+          id='sessionNameInput'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className='border-gray-200 border-2 rounded w-full px-2 py-1 text-sm sm:text-base placeholder:text-gray-500 text-gray-700'
+          placeholder='Team 1 vs Team 2'
+        />
+
+        <p className='text-gray-400 text-sm/tight italic mt-4'>NB: You can always change this by clicking on the name.</p>
       </DialogContent>
       <DialogActions>
         <Button
           onClick={() => {
             setSessionName(sessionName || 'Team 1 vs Team 2');
-            setName(sessionName || 'Team 1 vs Team 2')
+            setName(sessionName || 'Team 1 vs Team 2');
             setOpen(false);
           }}
           color='primary'
@@ -48,7 +42,7 @@ const SessionNamePopup = ({ setSessionName, sessionName, open, setOpen }) => {
         <Button
           onClick={() => {
             setSessionName(name || 'Team 1 vs Team 2');
-            setName(name || 'Team 1 vs Team 2')
+            setName(name || 'Team 1 vs Team 2');
             setOpen(false);
           }}
           color='secondary'

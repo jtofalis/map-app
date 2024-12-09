@@ -23,14 +23,6 @@ const UltimateFrisbeePitch = () => {
     catcher: { x: 95, y: 50 },
   });
 
-  const styles = {
-    main: {
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      textAlign: 'center',
-    },
-  };
-
   const [showNumbers, setShowNumbers] = useState(false);
   const [showArrows, setShowArrows] = useState(false);
   const [showPlayers, setShowPlayers] = useState(true);
@@ -39,7 +31,7 @@ const UltimateFrisbeePitch = () => {
   const [savedPositions, setSavedPositions] = useSavedPositions();
   const [sessionName, setSessionName] = useState(() => {
     const url = new URL(window.location.href);
-    const sessionName = url.searchParams.get('sessionName');
+    const sessionName = url.searchParams.get('name');
     return sessionName ?? '';
   });
   const [showSetNameModal, setShowSetNameModal] = useState(!sessionName);
@@ -85,6 +77,14 @@ const UltimateFrisbeePitch = () => {
     }
   }, [savedPositions]);
 
+  useEffect(() => {
+    if (!sessionName) return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set('name', encodeURIComponent(sessionName));
+    window.history.pushState({}, '', url);
+  }, [sessionName]);
+
   const handleClearAll = () => {
     setSavedPositions([]);
   };
@@ -120,8 +120,10 @@ const UltimateFrisbeePitch = () => {
             />
           )}
         </FrisbeePitch>
-
-        <div className='w-full max-w-md mx-auto mt-2'>
+        <div className='w-full max-w-md mx-auto px-10 py-4'>
+          <BarChart savedPositions={savedPositions} />
+        </div>
+        <div className='w-full max-w-md mx-auto'>
           <Toggle
             setShowArrows={setShowArrows}
             showArrows={showArrows}
@@ -134,15 +136,12 @@ const UltimateFrisbeePitch = () => {
             setShowNumbers={setShowNumbers}
             showNumbers={showNumbers}
           />
-          <div className='w-full max-w-md mx-auto px-10 py-4'>
-            <BarChart savedPositions={savedPositions} />
+          <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
+            © {new Date().getFullYear()} Made in collaboration with{' '}
+            <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
+              Robin Goudeketting
+            </a>
           </div>
-        </div>
-        <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
-          © {new Date().getFullYear()} Made in collaboration with{' '}
-          <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
-            Robin Goudeketting
-          </a>
         </div>
       </main>
       <Buttons

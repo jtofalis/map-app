@@ -27,12 +27,12 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
       ...commonConfig,
       container: throwContainer,
       gradient: {
-        '0': '#FFFFFF',
+        0: '#FFFFFF',
         '.3': '#94C6FF',
         '.5': '#3F90FF',
         '.7': '#0B5DBF',
-        '.9': '#05367A'
-      }
+        '.9': '#05367A',
+      },
     };
 
     // Create catch heatmap with container div
@@ -45,12 +45,12 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
       ...commonConfig,
       container: catchContainer,
       gradient: {
-        '0': '#FFFFFF',
+        0: '#FFFFFF',
         '.3': '#FFB3B3',
         '.5': '#FF6666',
         '.7': '#CC0000',
-        '.9': '#800000'
-      }
+        '.9': '#800000',
+      },
     };
 
     setThrowHeatmap(h337.create(throwConfig));
@@ -69,15 +69,14 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
   const ensureContainerPosition = () => {
     document.getElementById('throw-heatmap').style.position = 'absolute';
     document.getElementById('catch-heatmap').style.position = 'absolute';
-  }
-
+  };
 
   const throwDataPoints = useMemo(() => {
-    return savedPositions.map((position) => position.thrower);
+    return savedPositions.map((position) => ({ x: Math.round(position.thrower.x), y: Math.round(position.thrower.y) }));
   }, [savedPositions]);
 
   const catchDataPoints = useMemo(() => {
-    return savedPositions.map((position) => position.catcher);
+    return savedPositions.map((position) => ({ x: Math.round(position.catcher.x), y: Math.round(position.catcher.y) }));
   }, [savedPositions]);
 
   useEffect(() => {
@@ -102,7 +101,7 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
       throwHeatmap.setData({
         max: Math.sqrt(Math.max(...Object.values(throwCounts))),
-        data: throwPoints
+        data: throwPoints,
       });
       throwHeatmap.repaint();
     }
@@ -122,11 +121,11 @@ const Heatmap = ({ savedPositions, showThrows, showCatches, pitchRef }) => {
 
       catchHeatmap.setData({
         max: Math.sqrt(Math.max(...Object.values(catchCounts))),
-        data: catchPoints
+        data: catchPoints,
       });
       catchHeatmap.repaint();
     }
-    ensureContainerPosition()
+    ensureContainerPosition();
   }, [throwDataPoints, catchDataPoints, pitchRef, showThrows, showCatches, throwHeatmap, catchHeatmap]);
 
   return null;

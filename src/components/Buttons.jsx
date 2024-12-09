@@ -3,16 +3,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
 import React, { useState } from 'react';
 import ActionButton from './ActionButton';
+import Popup from './Popup';
 
 const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, showArrows, setShowArrows, addPossible }) => {
   const [isMinimized, setIsMinimized] = useState(false);
@@ -20,14 +13,6 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
 
   const toggleMinimize = () => {
     setIsMinimized((prev) => !prev);
-  };
-
-  const handleConfirmOpen = () => {
-    setOpenConfirmDialog(true);
-  };
-
-  const handleConfirmClose = () => {
-    setOpenConfirmDialog(false);
   };
 
   const handleConfirmClear = () => {
@@ -38,7 +23,9 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
   const buttons = [
     {
       label: 'Clear',
-      onClick: handleConfirmOpen,
+      onClick: () => {
+        setOpenConfirmDialog(true);
+      },
       Icon: DeleteIcon,
     },
     {
@@ -97,27 +84,12 @@ const Buttons = ({ handleSave, handleClearAll, showNumbers, setShowNumbers, show
       )}
 
       {/* Confirmation Dialog */}
-      <Dialog
+      <Popup
+        description='This action will clear all data. Do you want to proceed?'
         open={openConfirmDialog}
-        onClose={handleConfirmClose}
-        aria-labelledby="confirm-dialog-title"
-        aria-describedby="confirm-dialog-description"
-      >
-        <DialogTitle id="confirm-dialog-title">Are you sure?</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="confirm-dialog-description">
-            This action will clear all data. Do you want to proceed?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleConfirmClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleConfirmClear} color="secondary">
-            Clear
-          </Button>
-        </DialogActions>
-      </Dialog>
+        setOpen={setOpenConfirmDialog}
+        onConfirm={handleConfirmClear}
+      />
     </div>
   );
 };

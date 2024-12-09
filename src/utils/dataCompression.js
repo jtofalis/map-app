@@ -27,7 +27,13 @@ export const compress = (data) => {
   return data
     .map((state) => {
       const { thrower, catcher } = state;
-      return [toBase(thrower.x), toBase(thrower.y), toBase(catcher.x), toBase(catcher.y)].join('');
+
+      return [
+        toBase(Math.round(thrower.x)),
+        toBase(Math.round(thrower.y)),
+        toBase(Math.round(catcher.x)),
+        toBase(Math.round(catcher.y)),
+      ].join('');
     })
     .join('|');
 };
