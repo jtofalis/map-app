@@ -12,6 +12,7 @@ import Toggle from './components/Toggles';
 import { useSavedPositions } from './hooks/useSavedPositions';
 import { AppContext } from './utils/AppContext.js';
 import { compress } from './utils/dataCompression';
+import ShareButton from './components/ShareButton.jsx';
 
 export const ADJUSTMENT_FACTOR_X_FOR_ICON = 24;
 export const ADJUSTMENT_FACTOR_Y_FOR_ICON = 30;
@@ -141,6 +142,11 @@ const UltimateFrisbeePitch = () => {
             setShowNumbers={setShowNumbers}
             showNumbers={showNumbers}
           />
+          <div class="flex justify-center items-center m-5">
+
+          <ShareButton></ShareButton>
+
+          </div>
           <div className='font-mono text-[0.65rem] mt-5 text-gray-500 text-center'>
             © {new Date().getFullYear()} Made in collaboration with{' '}
             <a href='https://goudeketting.nl/' rel='noopener noreferrer' target='_blank' className='underline'>
