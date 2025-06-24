@@ -10,7 +10,7 @@ const BarChartLength = ({ savedPositions }) => {
   const toggleMinimize = () => {
     setIsMinimized((prev) => !prev);
   };
-  
+   
 
   // Calculate categories for distance
   const categoriesDistance = savedPositions.map(getDistanceCategory);
